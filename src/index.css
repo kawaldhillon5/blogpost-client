@@ -12,6 +12,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  line-height: 1.5;
+}
 
 a {
   font-weight: 500;
@@ -26,8 +32,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: stretch;
+
 }
 
 h1 {
@@ -65,4 +72,33 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#header_heading{
+  flex: 1;
+  padding:1%;
+  
+}
+
+#header_links {
+  flex: 1;
+  padding: 1%;
+  display: flex;
+  justify-content: space-around;
 }
