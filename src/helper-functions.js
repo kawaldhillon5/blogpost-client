@@ -1,23 +1,26 @@
 import axios from "axios";
 const baseURL = "http://localhost:3000/";
 
-
 export async function getAllBlogs(){
-   return axios.get(`${baseURL}client/allBlogPosts`)
+    let posts = {};
+    await axios.get(`${baseURL}client/allBlogPosts`)
     .then((response) => {
-        return response.data.posts;
+        posts = response.data.posts;
     })
     .catch(function(error){
         console.log(error);
     });
+    return posts;
 }
 
-export async function getBlog(id){
-    axios.get(`${baseURL}client/blog/${id}`)
+export async function getBlog(blogId){
+    let post = {}
+    await axios.get(`${baseURL}client/blog/${blogId}`)
     .then((response) => {
-        return response.data.post;
+        post = response.data.post;
     })
     .catch(function(error){
         console.log(error);
     });
+    return post;
 }

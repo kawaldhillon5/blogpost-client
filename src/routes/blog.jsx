@@ -1,14 +1,18 @@
+import { useLoaderData } from "react-router-dom";
+import { getBlog } from "../helper-functions"
+import HtmlParser from "react-html-parser";
+
+export async function loader({params}){
+    const blog = await getBlog(params.blogId);
+    return {blog}
+}
+
 export default function Blog(){
-    const blog = {
-        content: "this is a test",
-        date_created: "1/1/1111",
-        author: {last_name: "d", first_name:"k"},
-        tags: ["#science", "#programing"], 
-    }
+    const {blog} = useLoaderData();
     return (
 
         <>  <p>{blog.date_created}</p>
-            <p>{blog.content}</p>
+            <p>{HtmlParser(blog.content)}</p>
             <p>{`${blog.author.first_name} ${blog.author.last_name}`}</p>
         </>
 

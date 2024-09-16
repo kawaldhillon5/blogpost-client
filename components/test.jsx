@@ -13,7 +13,7 @@ export default function Test(){
         console.log(response.data);
       setPost(response.data);
     });
-  }, [posts]);
+  }, []);
 
   if (!posts) return null;
 

@@ -102,3 +102,7 @@ button:focus-visible {
   display: flex;
   justify-content: space-around;
 }
+
+#content {
+  padding: 10%;
+}

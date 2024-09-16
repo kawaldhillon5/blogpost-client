@@ -3,7 +3,7 @@ import { getAllBlogs } from "../helper-functions";
 
 
 export async function loader(){
-    const posts =  await getAllBlogs();
+    const posts = await getAllBlogs();
     return {posts};
 }
 export default function AllBlogs(){
