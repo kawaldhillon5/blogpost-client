@@ -11,7 +11,7 @@ export default function Root(){
                 </form>
                 <div id="header_links">
                     <Link to={`/client/allBlogPosts`}>All Blogs</Link>
-                    <Link to={`/client/requestBlog`}>Request Blog</Link>
+                    <Link to={`/client/allBlogRequests`}>Request Blog</Link>
                     <Link to={`/client/about`}>About</Link>
                 </div>
             </div>
