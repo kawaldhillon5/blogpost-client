@@ -15,7 +15,7 @@ export default function AllBlogs(){
                     <ul>
                         {posts.map(post =>
                             (<li key={post._id}>
-                                <Link to={`../client/blog/${post._id}`}>{post._id}</Link>
+                                <Link to={`../client/blog/${post._id}`}>{post.title}</Link>
                                 <div className="post-link-author">{post.author.last_name}</div>
                             </li>)
                         )}

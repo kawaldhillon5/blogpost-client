@@ -12,7 +12,8 @@ export default function Blog(){
     return (
 
         <>  <p>{blog.date_created}</p>
-            <p>{HtmlParser(blog.content)}</p>
+            <p>{blog.title}</p>
+            <p>{HtmlParser(blog.body)}</p>
             <p>{`${blog.author.first_name} ${blog.author.last_name}`}</p>
         </>
 
