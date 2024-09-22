@@ -51,3 +51,23 @@ export async function postBlogRequest(data) {
         console.log(error);
     })
 }
+
+export async function postSignUpData(data) {
+    return axios.post(`${baseURL}authenticate/signUp`,{data : data})
+    .then((response) => {
+        return response;
+    })
+    .catch((error) => {
+        return error.response
+    });
+}
+
+export async function logIn(username, password){
+    return await axios.post(`${baseURL}authenticate/logIn`, {username: username, password: password})
+    .then((response)=>{
+        return response;
+    })
+    .catch((error)=>{
+        return error.response;
+    })
+}

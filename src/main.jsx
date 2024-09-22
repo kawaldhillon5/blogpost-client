@@ -12,6 +12,9 @@ import AllBlogs, {loader as allBlogLoader} from "./routes/allBlogs";
 import AllBlogRequests, {loader as allBlogRequestLoader, action as allBlogRequestAction} from "./routes/allBlog-requests";
 import CreateBlogRequest, {action as createBlogRequestAction} from "./routes/new-request";
 import BlogRequest , {loader as blogRequestloader} from "./routes/request-blog";
+import Index from "./routes";
+import SignUp , {action as signUpAction}  from "./routes/auth-routes/signUp";
+import LogIn, {action as logInAction} from "./routes/auth-routes/logIn";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,20 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <Index />
+      },
+      {
+        path: 'authenticate/signUp',
+        element: <SignUp />,
+        action: signUpAction,
+      },
+      {
+        path: 'authenticate/logIn',
+        element: <LogIn />,
+        action: logInAction
+      },
       {
         path: "client/blog/:blogId",
         element: <Blog></Blog>,
