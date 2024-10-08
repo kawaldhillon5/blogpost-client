@@ -1,8 +1,13 @@
 import axios from "axios";
 const baseURL = "http://localhost:3000/";
 
+
+
+axios.defaults.withCredentials = true;
+
+
 export async function getAllBlogs(){
-   return await axios.get(`${baseURL}client/allBlogPosts`)
+   return await axios.get(`${baseURL}client/allBlogPosts`, {withCredentials: true})
     .then((response) => {
         return response.data.posts;
     })
@@ -10,7 +15,7 @@ export async function getAllBlogs(){
         console.log(error);
     });
 }
-
+axios.defaults.withCredentials = true;
 export async function getBlog(blogId){
     
     return await axios.get(`${baseURL}client/blog/${blogId}`)
@@ -63,7 +68,9 @@ export async function postSignUpData(data) {
 }
 
 export async function logIn(username, password){
-    return await axios.post(`${baseURL}authenticate/logIn`, {username: username, password: password})
+    return await axios.post(`${baseURL}authenticate/logIn`, 
+        {username: username, password: password}, 
+        {withCredentials: true, credential: "include"})
     .then((response)=>{
         return response;
     })
