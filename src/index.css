@@ -93,7 +93,7 @@ button:focus-visible {
 #header_heading{
   flex: 1;
   padding:1%;
-  
+  font-size: 200%;
 }
 
 #header_links {
@@ -101,8 +101,11 @@ button:focus-visible {
   padding: 1%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 #content {
-  padding: 10%;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
 }

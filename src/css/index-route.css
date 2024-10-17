@@ -1,0 +1,85 @@
+#index_div,#login_div{
+    background-color: #f9f9f911;
+    border-radius: 10px;
+    padding: 3%;
+    display: flex;
+    margin: 3%;
+    height: 73%;
+  }
+  
+  #index_left_side,#left_login_div{
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+  }
+  
+  #index_right_side,#right_login_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+  }
+  
+  #docu_img{
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  
+  #index_div_wlcm_msg{
+    font-size: 200%;
+    text-align: center;
+  }
+  
+  #index_user_name{
+    font-size: 200%;
+    font-style: italic;
+  }
+  
+  #auth_form_div{
+    font-size: 200%;
+  }
+  
+  #log_in_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #form_input_div_login{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  fieldset{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 120%;
+    border: none;
+  }
+  
+  fieldset>input{
+    font-size: 100%;
+    width: 40%;
+    margin-left: 3%;
+    border: none;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    background-color: #f9f9f911;
+  }
+
+  #header_links>.active{
+    color: #f9f9f9;
+  }
+  
+  #header_links>.pending{
+    text-decoration: underline;
+  }

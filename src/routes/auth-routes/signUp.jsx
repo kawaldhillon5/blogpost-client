@@ -1,12 +1,13 @@
 import { Form, redirect, useActionData } from "react-router-dom";
-import { postSignUpData } from "../helper-functions/functions";
+import { postSignUpData } from "../../helper-functions";
 
 export async function action({request,params}) {
     const formData = await request.formData();
     if(formData.get("password1") === formData.get("password2")){
         const formObject = Object.fromEntries(formData.entries());
         formObject.dateCreated = new Date();
-        if(formObject.editorReq === undefined){
+        console.log(formData.get("editorReq"));
+        if(formData.get("editorReq") === null){
             formObject.editorReq = "off";
         }
         try{
@@ -31,15 +32,19 @@ export default function SignUp(){
             <Form method="post">
             <div id="form-input_div">
                     <label htmlFor="username">Username:</label>
-                    <input type="text" name="username" />
+                    <input type="text" name="username" required />
+                    <label htmlFor="firstname">First Name:</label>
+                    <input type="text" name="firstname" required />
+                    <label htmlFor="lastname">Last Name:</label>
+                    <input type="text" name="lastname" required />
                     <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" />
+                    <input type="email" name="email" required/>
                     <label htmlFor="password1">Password:</label>
-                    <input type="password" name="password1"/>
+                    <input type="password" name="password1" required/>
                     <label htmlFor="password2">Confirm Password:</label>
-                    <input type="password" name="password2"/>
+                    <input type="password" name="password2" required/>
                     <label htmlFor="editorReq">Editor Request ?</label>
-                    <input type="checkbox" name="editor"></input>
+                    <input type="checkbox" name="editorReq"></input>
                 </div>
                 <button type="submit">Sign Up</button>
             </Form>

@@ -1,5 +1,8 @@
-import { Form, Link, redirect, useLoaderData } from "react-router-dom";
+import { NavLink, redirect, useLoaderData } from "react-router-dom";
 import { getAllBlogRequests } from "../helper-functions";
+import { format } from "date-fns";
+
+import "../css/blog-requests.css";
 
 export async function action(){
     return redirect('/client/requestBlog');
@@ -14,36 +17,38 @@ export default function AllBlogRequests(){
     const {reqs} = useLoaderData();
 
     return (
-        <div id="all_blog_req_div">
-            {reqs.length ? (
-                    <div id="not_empty_all_blog_req_div">
-                        <div id="all_blog_req_header_div">
-                            <p>All Requests</p>
-                            <Form method="post">
-                                <button type="submit">New Request</button>
-                            </Form>
-                        </div>
-                        <div id="all_blog_req_list_div">
-                            <ul>
-                                {reqs.map( req => (
-                                    <li key={req._id}>
-                                        <Link to={`../client/requestBlog/${req._id}`}>{req.title}</Link>
-                                        <div className="all_blog_req_date">{req.date_created}</div>
-                                        <div className="all_blog_req_votes">Votes: {req.votes}</div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                ) : (
-                    <div id = "empty_all_blog_req_div">
-                        <i>No Request</i>
-                        <Form method="post">
-                            <button type="submit">New Request</button>
-                        </Form>
-                    </div>
-                )
-            }
+        <div id="main_req_div">
+            <div className="req_div" id="blog_req_div">
+                <div className="req_div_title">Blog Requests</div>
+                    <button type="submit">New Request</button>
+                    <ul id="blog_req_items_div">
+                        {
+                            reqs.length === 0
+                            ? <li className="req_list_item">No Requests</li>
+                            : reqs.map((req)=>(
+                                <li className="blog_req_list_item" key={req._id}>
+                                    <div className="blog_req_item-top">
+                                        <NavLink className={({ isActive, isPending }) =>
+                                            isActive
+                                            ? "blog_req_item_title active"
+                                            : isPending
+                                            ? "blog_req_item_title pending"
+                                            : "blog_req_item_title"} to={`../client/requestBlog/${req._id}`}>{req.title}
+                                            <div
+                                            id="search-spinner"
+                                            aria-hidden
+                                            hidden={false}
+                                            />
+                                            </NavLink>
+                                        <div className="blog_req_item_date">{format(req.date_created, "yyyy/mm/dd")}</div>
+                                    </div>
+                                    <div className="blog_req_item_desc">{req.desc}</div>
+                                    <div className="blog_req_item_user">-{req.user.userName}</div>
+                                </li>
+                            ))
+                        }
+                    </ul>
+            </div>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import Root from "./routes/root";
+import Root, {loader as rootLoader, action as rootAction} from "./routes/root";
 import ErrorPage from "./erro-page";
 import Blog, {loader as blogLoader} from "./routes/blog";
 import AllBlogs, {loader as allBlogLoader} from "./routes/allBlogs";
@@ -15,12 +15,15 @@ import BlogRequest , {loader as blogRequestloader} from "./routes/request-blog";
 import Index from "./routes";
 import SignUp , {action as signUpAction}  from "./routes/auth-routes/signUp";
 import LogIn, {action as logInAction} from "./routes/auth-routes/logIn";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    loader: rootLoader,
+    action: rootAction,
     children: [
       {
         index: true,
@@ -37,30 +40,35 @@ const router = createBrowserRouter([
         action: logInAction
       },
       {
-        path: "client/blog/:blogId",
-        element: <Blog></Blog>,
-        loader: blogLoader,
-      },
-      {
-        path: "client/allBlogPosts",
-        element: <AllBlogs />,
-        loader: allBlogLoader,
-      },
-      {
-        path:"client/allBlogRequests",
-        element: <AllBlogRequests />,
-        loader: allBlogRequestLoader,
-        action: allBlogRequestAction,
-      },
-      {
-        path: "client/requestBlog",
-        element: <CreateBlogRequest />,
-        action: createBlogRequestAction,
-      },
-      {
-        path:"client/requestBlog/:reqId",
-        element: <BlogRequest />,
-        loader: blogRequestloader,
+        element: <ProtectedRoute />,
+        children:[
+          {
+            path: "client/blog/:blogId",
+            element: <Blog></Blog>,
+            loader: blogLoader,
+          },
+          {
+            path: "client/allBlogPosts",
+            element: <AllBlogs />,
+            loader: allBlogLoader,
+          },
+          {
+            path:"client/allBlogRequests",
+            element: <AllBlogRequests />,
+            loader: allBlogRequestLoader,
+            action: allBlogRequestAction,
+          },
+          {
+            path: "client/requestBlog",
+            element: <CreateBlogRequest />,
+            action: createBlogRequestAction,
+          },
+          {
+            path:"client/requestBlog/:reqId",
+            element: <BlogRequest />,
+            loader: blogRequestloader,
+          },
+        ]
       },
     ]
   },
