@@ -1,4 +1,4 @@
-#index_div,#login_div{
+#index_div,#login_div,#sign_up_div{
     background-color: #f9f9f911;
     border-radius: 10px;
     padding: 3%;
@@ -7,7 +7,7 @@
     height: 73%;
   }
   
-  #index_left_side,#left_login_div{
+  #index_left_side,#left_login_div,#left_signup_div{
     display: flex;
     justify-content:center ;
     align-items: center;
@@ -15,7 +15,7 @@
     width: 50%;
   }
   
-  #index_right_side,#right_login_div{
+  #index_right_side,#right_login_div,#right_signup_div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,26 +44,39 @@
     font-size: 200%;
   }
   
-  #log_in_form{
+  #log_in_form,#signup_form{
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
+  #signup_form{
+    width: 70%;
+  }
   
-  #form_input_div_login{
+  #form_input_div_login,#form_input_div_signup{
     width: 90%;
     display: flex;
     flex-direction: column;
   }
+
+  #login_fieldset{
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
-  fieldset{
+  #signup_fieldset{
     display: flex;
     justify-content: center;
-    width: 100%;
+    flex-direction: column;
+    width: 95%;
     font-size: 120%;
-    border: none;
+    border-radius: 15px;
+    margin-bottom: 2%;
   }
   
   fieldset>input{
@@ -76,6 +89,10 @@
     background-color: #f9f9f911;
   }
 
+  #signup_fieldset>input{
+    width: 70%;
+  }
+
   #header_links>.active{
     color: #f9f9f9;
   }
@@ -83,3 +100,41 @@
   #header_links>.pending{
     text-decoration: underline;
   }
+.signup_in_group{
+  width: 100%;
+  display: flex;
+  margin-bottom: 4%;
+}
+
+.signup_in_group>label{
+  width: 40%;
+}
+
+.signup_in_group>input{
+ width: 50%;
+ font-size: 100%;
+}
+
+.login_in_group{
+  width: 45%;
+  margin: 2%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login_in_group>input{
+  width: 70%;
+  font-size: 100%;
+}
+
+#footer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#footer>span{
+  margin-right: 4px;
+  font-style: italic;
+}
