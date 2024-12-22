@@ -8,26 +8,35 @@ export async function action() {
 }   
 
 export async function loader() {
-    const user = await getUser()
-    return {user}
+    
+    let user = null;
+
+    try{
+        const res = await getUser();
+        console.log(res);
+        if(res){
+            if(res.status === 200){
+                user = res
+                return user; 
+            } else if(res.status === 401) {
+                return user;
+            } else {
+                throw new Error("Cannot get user");
+            }
+        } throw new Error("Server Error");
+    } catch(error){
+        console.log(error.message);
+        throw error
+        
+    }
+
 }
 
 export default function Root(){
 
-    const [isLogged, setIsLogged] = useState(false);
-    const {user} = useLoaderData();
+    const user = useLoaderData();
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        function func() {
-           const u = user
-           if(u.user){
-               setIsLogged(true);
-           } else {
-               setIsLogged(false);
-           }
-       } func();
-   })
 
    const handleLogIn = () => {
        navigate('authenticate/logIn');
@@ -64,7 +73,7 @@ export default function Root(){
                         ? "pending"
                         : ""
                     } to={`/editor/about`}>About</NavLink>
-                    {isLogged ? <Form method="post"><button type="submit">Log Out</button></Form> : <button onClick={handleLogIn}>Log In</button>}
+                    {user ? <Form method="post"><button type="submit">Log Out</button></Form> : <button onClick={handleLogIn}>Log In</button>}
                 </div>
             </div>
             <div id="content">

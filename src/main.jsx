@@ -40,18 +40,18 @@ const router = createBrowserRouter([
         action: logInAction
       },
       {
+        path: "client/blog/:blogId",
+        element: <Blog></Blog>,
+        loader: blogLoader,
+      },
+      {
+        path: "client/allBlogPosts",
+        element: <AllBlogs />,
+        loader: allBlogLoader,
+      },
+      {
         element: <ProtectedRoute />,
         children:[
-          {
-            path: "client/blog/:blogId",
-            element: <Blog></Blog>,
-            loader: blogLoader,
-          },
-          {
-            path: "client/allBlogPosts",
-            element: <AllBlogs />,
-            loader: allBlogLoader,
-          },
           {
             path:"client/allBlogRequests",
             element: <AllBlogRequests />,

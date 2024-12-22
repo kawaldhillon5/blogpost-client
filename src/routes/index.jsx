@@ -13,10 +13,10 @@ export default function Index(){
             </div>
             <div id="index_right_side">
                 <div id="index_div_wlcm_msg">
-                    Welcome to the Blog Editor
+                    Welcome to the Blog Site
                 </div>
                 {
-                    (user.user === null) ?
+                    (user === null) ?
                     <div id="auth_form_div">
                         <Link to={'/authenticate/logIn'} className="auth_link">Log In</Link>
                         <p>Or</p>

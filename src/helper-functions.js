@@ -93,6 +93,7 @@ export async function LogOut(){
 export async function getUser(){
     return await axios.get(`${baseURL}authenticate/user`)
     .then((response) =>{
+        console.log(response.data);
         return response.data;
     })
     .catch((error) =>{
