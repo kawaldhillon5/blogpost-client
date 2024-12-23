@@ -25,12 +25,11 @@ export default function AllBlogs(){
                                             ? "blog_list_item_a pending"
                                             : "blog_list_item_a"
                                         }to={`../client/blog/${blog._id}`}>{blog.title} <div className="blog_list_item_author">-{blog.author.last_name}</div>
-                                        <div
-                                        id="search-spinner"
-                                        aria-hidden
-                                        hidden={false}
-                                        />
                                      </NavLink>
+                                     <div className="votes_comments_main">
+                                            <div className="votes_count">{blog.votes}</div>
+                                            <div className="comments_count">{blog.comments.length}</div>
+                                    </div>
                                 </li>)
                             )}
                         </ul>
