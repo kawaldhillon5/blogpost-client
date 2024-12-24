@@ -13,7 +13,6 @@ export async function loader() {
 
     try{
         const res = await getUser();
-        console.log(res);
         if(res){
             if(res.status === 200){
                 user = res

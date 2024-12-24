@@ -93,10 +93,30 @@ export async function LogOut(){
 export async function getUser(){
     return await axios.get(`${baseURL}authenticate/user`)
     .then((response) =>{
-        console.log(response.data);
         return response.data;
     })
     .catch((error) =>{
         console.log(error.data);
     });
+}
+
+export async function isVotedByUser(blogId) {
+    return await axios.get(`${baseURL}client/isVoted/${blogId}`)
+    .then((res)=> {
+        return res.status;
+    })
+    .catch((error)=>{
+        return error.response.status;
+    })
+}
+
+export async function postVote(blogId) {
+    return await axios.post(`${baseURL}client/vote/${blogId}`)
+    .then((res)=> {
+        return res.status;
+    })
+    .catch((error)=>{
+        console.log(error);
+        return error.response.status;
+    })
 }

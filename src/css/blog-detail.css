@@ -32,6 +32,7 @@
   margin-left: auto;
   margin-right: 1%;
   font-style: italic;
+  border-bottom: 1px solid white;
 }
 
 #blog_title_date_and_count{
@@ -43,7 +44,7 @@
 }  
 
 .votes_comments_main_details_page{
-  width: 20%;
+  width: 12%;
   font-size: 100%;
   background-color: #6e6e6ea8;
   border:1px solid rgb(10, 10, 10) ;
@@ -52,6 +53,43 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
-  
+
+#comments_div_main{
+  margin-top: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#comments_new_btn{
+  font-size: 80%;
+}
+
+#comments_div_header{
+  font-size: 150%;
+  margin-left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap:2%;
+  width: 40%;
+}
+
+.votes_comments_main_details_page>button{
+  background-color: #6e6e6ea8;
+  border-radius: 15px;
+  font-size: 130%;
+}
+
+.votes_comments_main_details_page>button::before{
+  margin-left: 30%;
+  margin-bottom: 5%;
+}
+
+
+.votes_comments_main_details_page>.vote_btn_blue{
+  background-color: #047ac9;
+}
+
