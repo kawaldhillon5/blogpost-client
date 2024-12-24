@@ -21,6 +21,9 @@
 
 .blog_date{
   font-size: 15px;
+  margin-right: 2%;
+  margin-left: auto;
+  font-size: 110%;
 }
 
 #blog_body_div{
@@ -36,6 +39,7 @@
 }
 
 #blog_title_date_and_count{
+  height: 100%;
   margin-left: 5%;
   display: flex;
   align-items: center;
@@ -44,16 +48,15 @@
 }  
 
 .votes_comments_main_details_page{
-  width: 12%;
-  font-size: 100%;
-  background-color: #6e6e6ea8;
+  width: 10%;
+  display: flex;
+  /* background-color: #6e6e6ea8;
   border:1px solid rgb(10, 10, 10) ;
   border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 #comments_div_main{
@@ -77,19 +80,21 @@
 }
 
 .votes_comments_main_details_page>button{
+  flex: 1;
   background-color: #6e6e6ea8;
   border-radius: 15px;
-  font-size: 130%;
+  height: 100%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .votes_comments_main_details_page>button::before{
-  margin-left: 30%;
-  margin-bottom: 5%;
+  content: url('../assets//images//like-svgrepo-com.svg');
 }
 
 
 .votes_comments_main_details_page>.vote_btn_blue{
-  background-color: #047ac9;
+  background-color: #50b9ff;
 }
 
 #comment_post_form{
@@ -187,3 +192,14 @@
 .comments_new_btn:hover {
   background-color: #777;
 }
+
+.tag_div{
+  color: white; /* White text for contrast */
+  padding: 5px 10px; /* Padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  margin: 2px 5px; /* Spacing between tags */
+  display: inline-block; /* Inline layout */
+  font-size: 18px; /* Font size */
+  font-family: sans-serif; /* Font family */
+}
+

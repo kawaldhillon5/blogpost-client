@@ -142,3 +142,11 @@ export async function postComment(blogId, comment) {
         return error.response;
     });
 }
+
+export function formatDate(date) {
+    return new Date(date).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+}

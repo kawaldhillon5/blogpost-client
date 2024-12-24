@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData, useOutletContext, useSubmit } from "react-router-dom";
-import { getBlog, getComments, getUser, isVotedByUser, postComment, postVote } from "../helper-functions"
+import { formatDate, getBlog, getComments, getUser, isVotedByUser, postComment, postVote } from "../helper-functions"
 import HtmlParser from "react-html-parser";
 import { format } from "date-fns";
 import "../css/blog-detail.css";
@@ -26,11 +26,17 @@ export default function Blog(){
     const {blog, isVoted, comments} = useLoaderData();
     const fetcher = useFetcher(); 
     const voted = fetcher.formData ? fetcher.formData.get("vote") === "false" : isVoted === 200 ? true: false;
-    console.log(comments);
+    console.log(comments.data);
 
     useEffect(()=>{
         document.querySelector("#comment_form_in").value = "";
-    })
+        
+    });
+
+    useEffect(()=>{
+        const tags = document.querySelectorAll('.tag_div');
+        styleTags(tags);
+    },[]);
 
     return (
 
@@ -38,14 +44,24 @@ export default function Blog(){
             <div id="blog_title_div_detail">
                 <div className="blog_title">{blog.title}</div>   
                 <div id="blog_title_date_and_count">
-                    <div className="blog_date">{format(blog.date_created,"yyyy/mm/dd")}</div>
                     <fetcher.Form method="post" className="votes_comments_main_details_page">
                         <button name="vote"
                                 value={voted ? "true": "false"}
-                                className={`${voted ? "vote_btn_blue votes_count": "vote_btn_grey votes_count"}`}
+                                className={`${voted ? "vote_btn_blue votes_count_details": "vote_btn_grey votes_count_details"}`}
                         ></button>
                     </fetcher.Form>
+                    { blog.tags.length ?
+                        <div id="blog_tags_div">
+                            {
+                              blog.tags.map(tag =>(
+                                <div className="tag_div">{tag}</div>
+                              ))  
+                            }
+                        </div>
+                        : null
+                    }
                 </div>
+                <div className="blog_date">{formatDate(blog.date_created)}</div>
             </div>
             <div id="blog_body_div">{HtmlParser(blog.body)}</div>
             <div id="blog_author">-{`${blog.author.first_name} ${blog.author.last_name}`}</div>
@@ -62,25 +78,21 @@ export default function Blog(){
                             <i>Could Not Load Comments</i> 
                           </div> 
                           :
-                            comments.data.comments.length ? 
+                            comments.data.length ? 
                             <div id="comments_div_list">
-                                {comments.data.comments.map((comment)=>(
+                                {comments.data.map((comment)=>(
                                     <Comment text={comment.text} date_created={comment.date_created} madeBy={comment.madeBy} />
                                 ))
                                 }
                             </div> :
-                            null
+                            null 
                     }
             </div>
         </div>
     )
 }
 const Comment = ({ text, date_created, madeBy }) => {
-    const formattedDate = new Date(date_created).toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    const formattedDate = formatDate(date_created);
   
     return (
       <div className="comment">
@@ -94,5 +106,37 @@ const Comment = ({ text, date_created, madeBy }) => {
         <p className="comment-text">{text}</p>
       </div>
     );
-  };
+};
+
+// function Tag({text}){
+
+//     const randomRed = Math.floor(Math.random() * 256);
+//     const randomGreen = Math.floor(Math.random() * 256);
+//     const randomBlue = Math.floor(Math.random() * 256);
+//     const randomColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${0.2})`;
+//     const borderColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${1})`;
+
+//     return (
+//         <div className="tag_div" style={{backgroundColor: `${randomColor}`,border: `1px solid ${borderColor}`}}>{text}</div>
+//     )
+// }
+
+function styleTags(tagElements) {
+    tagElements.forEach(tag => {
+      const randomRed = Math.floor(Math.random() * 256);
+      const randomGreen = Math.floor(Math.random() * 256);
+      const randomBlue = Math.floor(Math.random() * 256);
+      const randomAlpha = Math.random() * 0.5 + 0.3; // Alpha between 0.3 and 0.8 (more visible)
+
+      const randomColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${randomAlpha})`;
+      const borderColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${1})`;
+
+  
+      // Apply styles
+      tag.style.backgroundColor = randomColor;
+      tag.style.border = `1px solid, ${borderColor}`
+    });
+}
+  
+
   
