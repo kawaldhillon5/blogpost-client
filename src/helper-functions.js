@@ -107,7 +107,7 @@ export async function isVotedByUser(blogId) {
     })
     .catch((error)=>{
         return error.response.status;
-    })
+    });
 }
 
 export async function postVote(blogId) {
@@ -119,4 +119,15 @@ export async function postVote(blogId) {
         console.log(error);
         return error.response.status;
     })
+}
+
+export async function getComments(blogId) {
+    return await axios.get(`${baseURL}client/blog/comments/${blogId}`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
 }

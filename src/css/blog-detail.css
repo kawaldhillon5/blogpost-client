@@ -74,7 +74,7 @@
   align-items: center;
   justify-content: flex-start;
   gap:2%;
-  width: 40%;
+  width: 90%;
 }
 
 .votes_comments_main_details_page>button{
@@ -91,5 +91,39 @@
 
 .votes_comments_main_details_page>.vote_btn_blue{
   background-color: #047ac9;
+}
+
+#comment_post_form{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2%;
+}
+
+#comment_post_form>button{
+  font-size: 16px;
+}
+
+#comment_post_form>input {
+  width: 80%; 
+  padding: 5px;
+  font-size: 18px;
+  border: 1px solid #555; 
+  border-radius: 5px;
+  background-color: #333; 
+  color: #eee; 
+  outline: none; 
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+  box-sizing: border-box; 
+}
+
+#comment_post_form>input:focus {
+  border-color: #777; 
+  box-shadow: 0 0 5px rgba(100, 100, 100, 0.3);
+}
+
+#comment_post_form>input::placeholder {
+  color: #777; 
 }
 

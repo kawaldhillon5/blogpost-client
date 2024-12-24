@@ -110,38 +110,3 @@ button:focus-visible {
   height: 100%;
 }
 
-.votes_comments_main{
-  width: 90%;
-  height: 70%;
-  font-size: 100%;
-  background-color: #0a9dffa8;
-  border:1px solid rgb(10, 10, 10) ;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.votes_count,.comments_count{
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.votes_count::before{
-  margin-left: 20%;
-  margin-right: 10%;
-  width: 40%;
-  content: url('../assets/images/like-svgrepo-com.svg');
-  align-content: center;
-}
-
-.comments_count::before{
-  margin-left: 20%;
-  margin-right: 10%;
-  margin-top: 15%;
-  width: 40%;
-  content: url('../assets/images/comment-svgrepo-com.svg');
-}
