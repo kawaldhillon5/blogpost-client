@@ -131,3 +131,14 @@ export async function getComments(blogId) {
         return error.response;
     });
 }
+
+export async function postComment(blogId, comment) {
+    return await axios.post(`${baseURL}client/blog/postComment/${blogId}`,{data:comment})
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
+}

@@ -1,12 +1,18 @@
 import { useFetcher, useLoaderData, useOutletContext, useSubmit } from "react-router-dom";
-import { getBlog, getComments, getUser, isVotedByUser, postVote } from "../helper-functions"
+import { getBlog, getComments, getUser, isVotedByUser, postComment, postVote } from "../helper-functions"
 import HtmlParser from "react-html-parser";
 import { format } from "date-fns";
 import "../css/blog-detail.css";
+import { useEffect } from "react";
 
 export async function action({request,params}) {
     const formData = await request.formData();
-    return await postVote(params.blogId);
+    if(formData.get("vote")){
+        await postVote(params.blogId);
+    } else {
+       await postComment(params.blogId, formData.get("comment"));
+    }
+    return null; 
 }
 
 export async function loader({params}){
@@ -20,6 +26,12 @@ export default function Blog(){
     const {blog, isVoted, comments} = useLoaderData();
     const fetcher = useFetcher(); 
     const voted = fetcher.formData ? fetcher.formData.get("vote") === "false" : isVoted === 200 ? true: false;
+    console.log(comments);
+
+    useEffect(()=>{
+        document.querySelector("#comment_form_in").value = "";
+    })
+
     return (
 
         <div id="blog_div">  
@@ -41,8 +53,8 @@ export default function Blog(){
                 <div id="comments_div_header">
                     <div id="comments_header_text">Comments: {blog.comments.length}</div>
                     <fetcher.Form method="post" id="comment_post_form">
-                        <input type="text" name="comment" placeholder="Type Your Comment here" />
-                        <button id="comments_new_btn">Post </button>
+                        <input required id="comment_form_in" type="text" name="comment" placeholder="Type Your Comment here" />
+                        <button  className="comments_new_btn">Post </button>
                     </fetcher.Form>
                 </div>
                     { !(comments.status === 200) 
@@ -50,9 +62,12 @@ export default function Blog(){
                             <i>Could Not Load Comments</i> 
                           </div> 
                           :
-                            comments.data.length ? 
+                            comments.data.comments.length ? 
                             <div id="comments_div_list">
-
+                                {comments.data.comments.map((comment)=>(
+                                    <Comment text={comment.text} date_created={comment.date_created} madeBy={comment.madeBy} />
+                                ))
+                                }
                             </div> :
                             null
                     }
@@ -60,3 +75,24 @@ export default function Blog(){
         </div>
     )
 }
+const Comment = ({ text, date_created, madeBy }) => {
+    const formattedDate = new Date(date_created).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  
+    return (
+      <div className="comment">
+        <div className="comment-header"> {/* New header section */}
+          <span className="comment-author">
+            {/* Display "Anonymous" if madeBy is not available or not a valid ObjectId */}
+            {madeBy.userName || "Anonymous"}
+          </span>
+          <span className="comment-date">{formattedDate}</span>
+        </div>
+        <p className="comment-text">{text}</p>
+      </div>
+    );
+  };
+  
