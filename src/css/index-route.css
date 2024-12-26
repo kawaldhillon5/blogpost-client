@@ -1,131 +1,4 @@
-#index_div,#login_div,#sign_up_div{
-    background-color: #f9f9f911;
-    border-radius: 10px;
-    padding: 3%;
-    display: flex;
-    margin: 3%;
-    height: 73%;
-  }
-  
-  #index_left_side,#left_login_div,#left_signup_div{
-    display: flex;
-    justify-content:center ;
-    align-items: center;
-    height: 100%;
-    width: 50%;
-  }
-  
-  #index_right_side,#right_login_div,#right_signup_div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 50%;
-    flex-direction: column;
-  }
-  
-  #docu_img{
-    height: 100%;
-    object-fit: contain;
-    border-radius: 10px;
-  }
-  
-  #index_div_wlcm_msg{
-    font-size: 200%;
-    text-align: center;
-  }
-  
-  #index_user_name{
-    font-size: 200%;
-    font-style: italic;
-  }
-  
-  #auth_form_div{
-    font-size: 200%;
-  }
-  
-  #log_in_form,#signup_form{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
-  #signup_form{
-    width: 70%;
-  }
-  
-  #form_input_div_login,#form_input_div_signup{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  #login_fieldset{
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #signup_fieldset{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 95%;
-    font-size: 120%;
-    border-radius: 15px;
-    margin-bottom: 2%;
-  }
-  
-  fieldset>input{
-    font-size: 100%;
-    width: 40%;
-    margin-left: 3%;
-    border: none;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    border-radius: 5px;
-    background-color: #f9f9f911;
-  }
-
-  #signup_fieldset>input{
-    width: 70%;
-  }
-
-  #header_links>.active{
-    color: #f9f9f9;
-  }
-  
-  #header_links>.pending{
-    text-decoration: underline;
-  }
-.signup_in_group{
-  width: 100%;
-  display: flex;
-  margin-bottom: 4%;
-}
-
-.signup_in_group>label{
-  width: 40%;
-}
-
-.signup_in_group>input{
- width: 50%;
- font-size: 100%;
-}
-
-.login_in_group{
-  width: 45%;
-  margin: 2%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.login_in_group>input{
-  width: 70%;
-  font-size: 100%;
-}
 
 #footer{
   width: 100%;
@@ -137,4 +10,73 @@
 #footer>span{
   margin-right: 4px;
   font-style: italic;
+}
+
+
+.home-page-container {
+  width: 60%;
+  height: 90%;
+  margin: 20px auto;
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 8px;
+  color: #eee;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  background-color: #444;
+  color: #eee;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.tabs button.active {
+  background-color: #666;
+}
+
+.blog-list, .author-list {
+  padding: 10px;
+}
+
+.blog-preview {
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.blog-preview a{
+  color: #66b3ff;
+  text-decoration: none;
+}
+.blog-preview a:hover{
+  text-decoration: underline;
+}
+
+.blog-list h2, .author-list h2 {
+  margin-bottom: 10px;
+}
+
+.author-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.author-list li {
+  margin-bottom: 5px;
+}
+.author-list li a{
+  color: #66b3ff;
+  text-decoration: none;
+}
+.author-list li a:hover{
+  text-decoration: underline;
 }

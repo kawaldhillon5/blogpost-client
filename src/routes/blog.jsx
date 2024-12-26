@@ -1,7 +1,6 @@
 import { useFetcher, useLoaderData, useOutletContext, useSubmit } from "react-router-dom";
 import { formatDate, getBlog, getComments, getUser, isVotedByUser, postComment, postVote } from "../helper-functions"
 import HtmlParser from "react-html-parser";
-import { format } from "date-fns";
 import "../css/blog-detail.css";
 import { useEffect } from "react";
 
@@ -25,12 +24,14 @@ export async function loader({params}){
 export default function Blog(){
     const {blog, isVoted, comments} = useLoaderData();
     const fetcher = useFetcher(); 
+    const user = useOutletContext();
     const voted = fetcher.formData ? fetcher.formData.get("vote") === "false" : isVoted === 200 ? true: false;
-    console.log(comments.data);
+    console.log(user);
 
     useEffect(()=>{
-        document.querySelector("#comment_form_in").value = "";
-        
+        if(user) {
+            document.querySelector("#comment_form_in").value = "";
+        }
     });
 
     useEffect(()=>{
@@ -44,12 +45,14 @@ export default function Blog(){
             <div id="blog_title_div_detail">
                 <div className="blog_title">{blog.title}</div>   
                 <div id="blog_title_date_and_count">
-                    <fetcher.Form method="post" className="votes_comments_main_details_page">
-                        <button name="vote"
-                                value={voted ? "true": "false"}
-                                className={`${voted ? "vote_btn_blue votes_count_details": "vote_btn_grey votes_count_details"}`}
-                        ></button>
-                    </fetcher.Form>
+                    { user ? <fetcher.Form method="post" className="votes_comments_main_details_page">
+                            <button name="vote"
+                                    value={voted ? "true": "false"}
+                                    className={`${voted ? "vote_btn_blue votes_count_details": "vote_btn_grey votes_count_details"}`}
+                            ></button>
+                        </fetcher.Form>
+                        : null
+                    }
                     { blog.tags.length ?
                         <div id="blog_tags_div">
                             {
@@ -68,10 +71,13 @@ export default function Blog(){
             <div id="comments_div_main">
                 <div id="comments_div_header">
                     <div id="comments_header_text">Comments: {blog.comments.length}</div>
-                    <fetcher.Form method="post" id="comment_post_form">
-                        <input required id="comment_form_in" type="text" name="comment" placeholder="Type Your Comment here" />
-                        <button  className="comments_new_btn">Post </button>
-                    </fetcher.Form>
+                    { user ? 
+                        <fetcher.Form method="post" id="comment_post_form">
+                            <input required id="comment_form_in" type="text" name="comment" placeholder="Type Your Comment here" />
+                            <button  className="comments_new_btn">Post </button>
+                        </fetcher.Form> 
+                        :null
+                    }
                 </div>
                     { !(comments.status === 200) 
                         ? <div id="comments_div_error">
@@ -108,18 +114,6 @@ const Comment = ({ text, date_created, madeBy }) => {
     );
 };
 
-// function Tag({text}){
-
-//     const randomRed = Math.floor(Math.random() * 256);
-//     const randomGreen = Math.floor(Math.random() * 256);
-//     const randomBlue = Math.floor(Math.random() * 256);
-//     const randomColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${0.2})`;
-//     const borderColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${1})`;
-
-//     return (
-//         <div className="tag_div" style={{backgroundColor: `${randomColor}`,border: `1px solid ${borderColor}`}}>{text}</div>
-//     )
-// }
 
 function styleTags(tagElements) {
     tagElements.forEach(tag => {

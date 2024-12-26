@@ -91,7 +91,6 @@ button:focus-visible {
 }
 
 #header_heading{
-  flex: 1;
   padding:1%;
   font-size: 200%;
 }

@@ -1,10 +1,8 @@
 import axios from "axios";
+import { ca } from "date-fns/locale";
 const baseURL = "http://localhost:3000/";
 
-
-
 axios.defaults.withCredentials = true;
-
 
 export async function getAllBlogs(){
    return await axios.get(`${baseURL}client/allBlogPosts`, {withCredentials: true})
@@ -149,4 +147,44 @@ export function formatDate(date) {
         month: 'long',
         day: 'numeric',
     });
+}
+
+export  async function searchBlogs(query){
+    try {
+        const res = await axios.get(`${baseURL}client/blogs?search=${query}`);
+        return res;
+    } catch (err) {
+        console.log(err);
+        return err.res;
+    } 
+}
+
+export async function getPopularAuthors() {
+    try {
+        const res = await axios.get(`${baseURL}client/authors/popularAuthors`);
+        return res;
+    } catch (err) {
+        console.log(err);
+        return err.res;
+    } 
+}
+
+export async function getNewBlogs() {
+    try {
+        const res = await axios.get(`${baseURL}client/blogs/newBlogs`);
+        return res;
+    } catch (err) {
+        console.log(err);
+        return err.res;
+    } 
+}
+
+export async function getPopularBlogs() {
+    try {
+        const res = await axios.get(`${baseURL}client/blogs/popularBlogs`);
+        return res;
+    } catch (err) {
+        console.log(err);
+        return err.res;
+    } 
 }

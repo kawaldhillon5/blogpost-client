@@ -1,6 +1,7 @@
-import { NavLink, Link, Outlet, useLoaderData, Navigate, useNavigate, redirect, Form} from "react-router-dom";
+import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form} from "react-router-dom";
 import { getUser, LogOut } from "../helper-functions";
 import { useEffect, useState } from "react";
+import BlogSearch from "../components/blogs-search";
 
 export async function action() {
     await LogOut();
@@ -47,9 +48,7 @@ export default function Root(){
         <>
             <div id="header">
                 <Link to={"/"} id="header_heading">blog</Link>
-                <form>
-                    <input type="search" placeholder="Search Blogs and Requests here" name="header_search"></input>
-                </form>
+                <BlogSearch />
                 <div id="header_links">
                     <NavLink className={({ isActive, isPending }) =>
                       isActive
@@ -85,3 +84,5 @@ export default function Root(){
         </>
     )
 }
+
+
