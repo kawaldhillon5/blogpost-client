@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData, useOutletContext, useSubmit } from "react-router-dom";
-import { formatDate, getBlog, getComments, getUser, isVotedByUser, postComment, postVote } from "../helper-functions"
+import { formatDate, getBlog, getComments, isVotedByUser, postComment, postVote } from "../helper-functions"
 import HtmlParser from "react-html-parser";
 import "../css/blog-detail.css";
 import { useEffect } from "react";
@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export async function action({request,params}) {
     const formData = await request.formData();
     if(formData.get("vote")){
-        await postVote(params.blogId);
+        await postVote(params.blogId, 'blog');
     } else {
        await postComment(params.blogId, formData.get("comment"));
     }
@@ -16,7 +16,7 @@ export async function action({request,params}) {
 
 export async function loader({params}){
     const blog = await getBlog(params.blogId);
-    const isVoted = await isVotedByUser(params.blogId);
+    const isVoted = await isVotedByUser(params.blogId, 'blog');
     const comments = await getComments(params.blogId);
     return {blog, isVoted, comments};
 }
@@ -25,7 +25,7 @@ export default function Blog(){
     const {blog, isVoted, comments} = useLoaderData();
     const fetcher = useFetcher(); 
     const user = useOutletContext();
-    const voted = fetcher.formData ? fetcher.formData.get("vote") === "false" : isVoted === 200 ? true: false;
+    const voted = fetcher.formData ? fetcher.formData.get("vote") === "false" : isVoted.data === true ? true: false;
     console.log(user);
 
     useEffect(()=>{

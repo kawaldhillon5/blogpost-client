@@ -1,11 +1,12 @@
-import { NavLink, redirect, useLoaderData } from "react-router-dom";
-import { getAllBlogRequests } from "../helper-functions";
+import { NavLink, redirect, useFetcher, useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
+import { formatDate, getAllBlogRequests } from "../helper-functions";
 import { format } from "date-fns";
 
 import "../css/blog-requests.css";
+import ReqVoteComponent from "../components/request-vote";
 
 export async function action(){
-    return redirect('/client/requestBlog');
+
 }
 
 export async function loader() {
@@ -15,12 +16,15 @@ export async function loader() {
 
 export default function AllBlogRequests(){
     const {reqs} = useLoaderData();
+    const user = useOutletContext();
+    const navigate = useNavigate();
+    const fetcher  = useFetcher();
 
     return (
         <div id="main_req_div">
             <div className="req_div" id="blog_req_div">
                 <div className="req_div_title">Blog Requests</div>
-                    <button type="submit">New Request</button>
+                    {user ? <button type="button" onClick={()=> navigate('/client/requestBlog')}>New Request</button> : null}
                     <ul id="blog_req_items_div">
                         {
                             reqs.length === 0
@@ -40,10 +44,16 @@ export default function AllBlogRequests(){
                                             hidden={false}
                                             />
                                             </NavLink>
-                                        <div className="blog_req_item_date">{format(req.date_created, "yyyy/mm/dd")}</div>
+                                            { user ?
+                                                <ReqVoteComponent reqID={req._id} />
+                                                : null
+                                            }
                                     </div>
                                     <div className="blog_req_item_desc">{req.desc}</div>
-                                    <div className="blog_req_item_user">-{req.user.userName}</div>
+                                    <div className="blog_req_item_user_date">
+                                        <div className="req_item_date">{formatDate(req.date_created)}</div>
+                                        <div className="req_item_user">-{req.user.userName}</div>
+                                    </div>
                                 </li>
                             ))
                         }

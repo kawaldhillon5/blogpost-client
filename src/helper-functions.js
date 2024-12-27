@@ -98,18 +98,28 @@ export async function getUser(){
     });
 }
 
-export async function isVotedByUser(blogId) {
-    return await axios.get(`${baseURL}client/isVoted/${blogId}`)
+export async function isVotedByUser(id, type) {
+    return await axios.get(`${baseURL}client/isVoted/${type}/${id}`)
     .then((res)=> {
-        return res.status;
+        return res;
     })
     .catch((error)=>{
-        return error.response.status;
+        return error.response;
     });
 }
 
-export async function postVote(blogId) {
-    return await axios.post(`${baseURL}client/vote/${blogId}`)
+export async function getVotes(id, type) {
+    return await axios.get(`${baseURL}client/votes/${type}/${id}`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        return error.response;
+    });
+}
+
+export async function postVote(id,type) {
+    return axios.post(`${baseURL}client/vote/${type}/${id}`)
     .then((res)=> {
         return res.status;
     })

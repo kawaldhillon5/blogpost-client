@@ -1,10 +1,16 @@
-import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form} from "react-router-dom";
+import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form, useLocation} from "react-router-dom";
 import { getUser, LogOut } from "../helper-functions";
 import { useEffect, useState } from "react";
 import BlogSearch from "../components/blogs-search";
 
-export async function action() {
+export async function action({request, params}) {
+    const formData = await request.formData();
     await LogOut();
+    const previousLocation = JSON.parse(formData.get('previousLocation'));
+    console.log(previousLocation);
+    if (previousLocation) {
+        return redirect(`${previousLocation}`)
+    }
     return redirect('/');
 }   
 
@@ -36,10 +42,10 @@ export default function Root(){
 
     const user = useLoaderData();
     const navigate = useNavigate();
-
-
+    const location = useLocation();
+ 
    const handleLogIn = () => {
-       navigate('authenticate/logIn');
+       navigate('authenticate/logIn', {state: {from:location.pathname}});
    }
 
 
@@ -71,7 +77,12 @@ export default function Root(){
                         ? "pending"
                         : ""
                     } to={`/editor/about`}>About</NavLink>
-                    {user ? <Form method="post"><button type="submit">Log Out</button></Form> : <button onClick={handleLogIn}>Log In</button>}
+                    {user ? <Form method="post">
+                        <button type="submit">Log Out</button>
+                        <input type="hidden" name="previousLocation" value={JSON.stringify(location.pathname|| '/')} />
+                        </Form> : 
+                        <button onClick={handleLogIn}>Log In</button>
+                    }
                 </div>
             </div>
             <div id="content">

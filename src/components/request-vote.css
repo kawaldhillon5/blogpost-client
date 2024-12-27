@@ -1,0 +1,53 @@
+.vote-container {
+    display: inline-flex; /* Use inline-flex to contain the button */
+    align-items: center;
+    position: relative; /* Needed for tooltip positioning */
+
+  }
+  
+  .vote-button {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #666; /* Default dark color */
+    transition: color 0.3s;
+    display: flex;
+    align-items: center; /* Center icon and count vertically */
+  }
+  
+  .vote-button.active {
+    color: #007bff; /* Blue when voted */
+  }
+  
+  .vote-count {
+    margin-left: 5px; /* Space between icon and count */
+    font-weight: bold;
+  }
+  
+  .error-icon-container {
+    margin-left: 5px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.error-icon {
+  color: red;
+  cursor: default; /* Change cursor to indicate it's not clickable */
+}
+
+.error-tooltip {
+  position: absolute;
+  top: 120%; /* Position below the icon */
+  left: 50%;
+  transform: translateX(-100%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  white-space: nowrap; /* Prevent tooltip text from wrapping */
+  z-index: 1; /* Ensure tooltip is above other content */
+}

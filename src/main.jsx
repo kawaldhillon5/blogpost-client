@@ -52,24 +52,26 @@ const router = createBrowserRouter([
         loader: allBlogLoader,
       },
       {
+        path:"client/allBlogRequests",
+        element: <AllBlogRequests />,
+        loader: allBlogRequestLoader,
+        action: allBlogRequestAction,
+      },
+      {
+        path:"client/requestBlog/:reqId",
+        element: <BlogRequest />,
+        loader: blogRequestloader,
+      },
+      {
         element: <ProtectedRoute />,
         children:[
-          {
-            path:"client/allBlogRequests",
-            element: <AllBlogRequests />,
-            loader: allBlogRequestLoader,
-            action: allBlogRequestAction,
-          },
+          
           {
             path: "client/requestBlog",
             element: <CreateBlogRequest />,
             action: createBlogRequestAction,
           },
-          {
-            path:"client/requestBlog/:reqId",
-            element: <BlogRequest />,
-            loader: blogRequestloader,
-          },
+          
         ]
       },
     ]

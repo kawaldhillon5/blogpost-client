@@ -1,4 +1,4 @@
-import { Form, redirect, useActionData } from "react-router-dom";
+import { Form, redirect, useActionData, useLoaderData, useLocation } from "react-router-dom";
 import { logIn } from "../../helper-functions";
 import documImg from "../../assets/images/document-Img.jpg";
 
@@ -14,13 +14,19 @@ export async function action({request, params}) {
     } catch (error){
         console.log(error.message);
         return error.message;
-    }
+    } 
+    const previousLocation = JSON.parse(formData.get('previousLocation'));
+    console.log(previousLocation);
+    if (previousLocation) {
+        return redirect(`${previousLocation}`)
+      }
     return redirect('/');
 }
 
 export default function LogIn(){
     let error = useActionData()
-    
+    const location = useLocation();
+    console.log(location);
     return (
         <div id="login_div">
             <div id="left_login_div">
@@ -30,6 +36,7 @@ export default function LogIn(){
                 <Form method="post" id="log_in_form">
                     <div id="form_input_div_login">
                         <fieldset id="login_fieldset">
+                        <input type="hidden" name="previousLocation" value={JSON.stringify(location.state?.from || '/')} />
                             <div className="login_in_group">
                                 <label htmlFor="username">username:</label>
                                 <input type="text" name="username" />
