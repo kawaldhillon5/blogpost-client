@@ -5,7 +5,7 @@ import { getVotes, isVotedByUser, postVote } from '../helper-functions';
 import { set } from 'lodash';
 
 
-const ReqVoteComponent = ({ initialVotes = 0, initialState = false, reqID}) => {
+const ReqVoteComponent = ({ initialVotes = 0, initialState = false, id, type}) => {
   const [votes, setVotes] = useState(initialVotes);
   const [hasVoted, setHasVoted] = useState(initialState);
   const [error, setError] = useState(null);
@@ -21,7 +21,7 @@ const ReqVoteComponent = ({ initialVotes = 0, initialState = false, reqID}) => {
         setHasVoted(false);
     }
     try {
-     const response = await postVote(reqID, 'req');
+     const response = await postVote(id, type);
      if (response !== 200) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -43,7 +43,7 @@ const ReqVoteComponent = ({ initialVotes = 0, initialState = false, reqID}) => {
   useEffect(()=>{
     async function func(){
         try {
-        const resp = await getVotes(reqID,'req');
+        const resp = await getVotes(id,type);
         if(resp.status === 200){
             setVotes(resp.data.votes);
         } else {
@@ -59,7 +59,7 @@ const ReqVoteComponent = ({ initialVotes = 0, initialState = false, reqID}) => {
   useEffect(()=>{
     async function func(){
         try {
-            const resp = await isVotedByUser(reqID, 'req');
+            const resp = await isVotedByUser(id, type);
             if(resp.status === 200){
                 setHasVoted(resp.data);
             } else {

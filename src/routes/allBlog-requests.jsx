@@ -45,7 +45,7 @@ export default function AllBlogRequests(){
                                             />
                                             </NavLink>
                                             { user ?
-                                                <ReqVoteComponent reqID={req._id} />
+                                                <ReqVoteComponent id={req._id} type={'req'} />
                                                 : null
                                             }
                                     </div>

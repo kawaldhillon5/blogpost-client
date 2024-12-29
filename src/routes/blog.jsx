@@ -3,6 +3,7 @@ import { formatDate, getBlog, getComments, isVotedByUser, postComment, postVote 
 import HtmlParser from "react-html-parser";
 import "../css/blog-detail.css";
 import { useEffect } from "react";
+import ReqVoteComponent from "../components/request-vote";
 
 export async function action({request,params}) {
     const formData = await request.formData();
@@ -25,8 +26,6 @@ export default function Blog(){
     const {blog, isVoted, comments} = useLoaderData();
     const fetcher = useFetcher(); 
     const user = useOutletContext();
-    const voted = fetcher.formData ? fetcher.formData.get("vote") === "false" : isVoted.data === true ? true: false;
-    console.log(user);
 
     useEffect(()=>{
         if(user) {
@@ -45,12 +44,8 @@ export default function Blog(){
             <div id="blog_title_div_detail">
                 <div className="blog_title">{blog.title}</div>   
                 <div id="blog_title_date_and_count">
-                    { user ? <fetcher.Form method="post" className="votes_comments_main_details_page">
-                            <button name="vote"
-                                    value={voted ? "true": "false"}
-                                    className={`${voted ? "vote_btn_blue votes_count_details": "vote_btn_grey votes_count_details"}`}
-                            ></button>
-                        </fetcher.Form>
+                        { user ? 
+                        <ReqVoteComponent id={blog._id} type= 'blog' />
                         : null
                     }
                     { blog.tags.length ?
