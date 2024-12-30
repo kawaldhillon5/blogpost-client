@@ -198,3 +198,14 @@ export async function getPopularBlogs() {
         return err.res;
     } 
 }
+
+export function getFeaturedBlog() {
+    return axios.get(`${baseURL}client/featuredBlog`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
+}

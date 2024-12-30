@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500&display=swap');
+
+.welcome-container {
+position: relative;
+border-radius: 10px;
+text-align: center;
+color: #f0f0f0;
+padding-bottom: 20px;
+max-width: 1200px;
+}
+
+
+
+#tsparticles {
+overflow: hidden;
+position: absolute;
+border-radius: 8px;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+z-index: 1; /* Behind the content */
+}
+
+.welcome-content {
+position: relative; /* Ensure text is above particles */
+z-index: 2;
+max-width: 800px;
+margin: 0 auto;
+transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.welcome-container:hover .welcome-content {
+transform: scale(1.02);
+filter: brightness(1.05);
+}
+
+.welcome-container:hover .welcome-content {
+transform: scale(1.02);
+filter: brightness(1.05);
+}
+
+.welcome-container h1 {
+font-family: 'Playfair Display', serif; /* Elegant serif for heading */
+font-size: 4rem;
+margin-bottom: 20px;
+font-weight: 700;
+letter-spacing: 2px;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+color: #f8f0e3;
+}
+
+.welcome-container p {
+font-family: 'Montserrat', sans-serif; /* Clean sans-serif for paragraph */
+font-size: 1.3rem;
+line-height: 1.8;
+margin-bottom: 0px;
+color: #e0d8c0;
+text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments (adjust font sizes as needed) */
+@media (max-width: 768px) {
+.welcome-container h1 {
+    font-size: 2.8rem;
+}
+
+.welcome-container p {
+    font-size: 1.1rem;
+}
+}

@@ -1,7 +1,7 @@
-import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form, useLocation} from "react-router-dom";
+import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form, useLocation, useNavigation} from "react-router-dom";
 import { getUser, LogOut } from "../helper-functions";
-import { useEffect, useState } from "react";
 import BlogSearch from "../components/blogs-search";
+import '../css/scrollbar.css'
 
 export async function action({request, params}) {
     const formData = await request.formData();
@@ -43,7 +43,8 @@ export default function Root(){
     const user = useLoaderData();
     const navigate = useNavigate();
     const location = useLocation();
- 
+    const navigation = useNavigation();
+
    const handleLogIn = () => {
        navigate('authenticate/logIn', {state: {from:location.pathname}});
    }
@@ -51,7 +52,11 @@ export default function Root(){
 
 
     return (
-        <>
+        <>  
+            <div>
+                {navigation.state === 'loading' && <div className="loading-bar"></div>}
+                {/* ... your other content ... */}
+            </div>
             <div id="header">
                 <Link to={"/"} id="header_heading">blog</Link>
                 <BlogSearch />

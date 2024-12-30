@@ -17,13 +17,12 @@ export async function action({request,params}) {
 
 export async function loader({params}){
     const blog = await getBlog(params.blogId);
-    const isVoted = await isVotedByUser(params.blogId, 'blog');
     const comments = await getComments(params.blogId);
-    return {blog, isVoted, comments};
+    return {blog, comments};
 }
 
 export default function Blog(){
-    const {blog, isVoted, comments} = useLoaderData();
+    const {blog, comments} = useLoaderData();
     const fetcher = useFetcher(); 
     const user = useOutletContext();
 
