@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import Welcome from "../components/welcome";
 import FeaturedBlog from "../components/featured-blog";
+import Notifications from "../components/notifications";
 
 export async function loader() {
 
@@ -37,6 +38,7 @@ export default function Index(){
                     </div>
                 </div>
                 )}
+                <Notifications />
             </div>
         </div>
     )

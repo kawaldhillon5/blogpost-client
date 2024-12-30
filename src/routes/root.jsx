@@ -58,7 +58,7 @@ export default function Root(){
                 {/* ... your other content ... */}
             </div>
             <div id="header">
-                <Link to={"/"} id="header_heading">blog</Link>
+                <Link to={"/"} id="header_heading">Blog</Link>
                 <BlogSearch />
                 <div id="header_links">
                     <NavLink className={({ isActive, isPending }) =>

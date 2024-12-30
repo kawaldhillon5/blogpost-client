@@ -18,7 +18,6 @@ export default function AllBlogRequests(){
     const {reqs} = useLoaderData();
     const user = useOutletContext();
     const navigate = useNavigate();
-    const fetcher  = useFetcher();
 
     return (
         <div id="main_req_div">
