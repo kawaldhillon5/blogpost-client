@@ -175,7 +175,7 @@ export async function getPopularAuthors() {
         return res;
     } catch (err) {
         console.log(err);
-        return err.res;
+        return err.response;
     } 
 }
 
@@ -185,7 +185,7 @@ export async function getNewBlogs() {
         return res;
     } catch (err) {
         console.log(err);
-        return err.res;
+        return err.response;
     } 
 }
 
@@ -195,12 +195,12 @@ export async function getPopularBlogs() {
         return res;
     } catch (err) {
         console.log(err);
-        return err.res;
+        return err.response;
     } 
 }
 
-export function getFeaturedBlog() {
-    return axios.get(`${baseURL}client/featuredBlog`)
+export function getRequestFunc(url) {
+    return axios.get(`${baseURL}${url}`)
     .then((res)=> {
         return res;
     })
@@ -209,3 +209,26 @@ export function getFeaturedBlog() {
         return error.response;
     });
 }
+
+export function deleteNotification(id){
+    return axios.delete(`${baseURL}client/delete/notification/${id}`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
+}
+
+export function postEditorReq(){
+    return axios.post(`${baseURL}client/postEditorReq`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
+}
+

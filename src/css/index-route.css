@@ -39,6 +39,8 @@
 
 .call-to-action {
   height: 100%;
+  max-width: 30%;
+  min-width: 30%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -59,9 +61,9 @@
     margin-bottom: 20px;
 }
 
-.call-to-action p {
+/* .call-to-action p {
     margin-bottom: 30px;
-}
+} */
 
 .write-blog-button, .auth-button {
   text-decoration: none;
@@ -89,8 +91,8 @@
     justify-content: center;
 }
 
-#noti-main-div{
-  flex: 1;
-  padding: 20px;
-
+#cta-loading-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

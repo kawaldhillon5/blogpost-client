@@ -1,11 +1,10 @@
-import { Link, useLoaderData, useOutletContext } from "react-router-dom"
+import {  useOutletContext } from "react-router-dom"
 import "../css/index-route.css"
-import {getNewBlogs, getPopularAuthors, getPopularBlogs } from "../helper-functions"
-import { useState } from "react";
-import { FaThumbsUp } from "react-icons/fa";
+
 import Welcome from "../components/welcome";
 import FeaturedBlog from "../components/featured-blog";
 import Notifications from "../components/notifications";
+import Cta from "../components/CTA";
 
 export async function loader() {
 
@@ -23,21 +22,7 @@ export default function Index(){
             <FeaturedBlog />   
             </div>
             <div className="call-to-action">
-                {user ? (
-                <div>
-                    <h2>Ready to Share Your Thoughts?</h2>
-                    <Link to="/create-blog" className="write-blog-button">Write Your Blog</Link>
-                </div>
-                ) : (
-                <div>
-                    <h2>Join Our Community!</h2>
-                    <p>Sign up to share your stories and connect with other readers.</p>
-                    <div className='auth-buttons'>
-                    <Link to="/authenticate/signUp" className="auth-button">Sign Up</Link>
-                    <Link to="/authenticate/logIn" className="auth-button">Log In</Link>
-                    </div>
-                </div>
-                )}
+                <Cta />
                 <Notifications />
             </div>
         </div>

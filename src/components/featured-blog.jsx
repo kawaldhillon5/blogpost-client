@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import './featuredBlog.css'; // Import CSS
-import { getFeaturedBlog } from '../helper-functions';
+import {getRequestFunc } from '../helper-functions';
 import { Link } from 'react-router-dom';
 
 const FeaturedBlog = () => {
@@ -12,8 +11,7 @@ const FeaturedBlog = () => {
   useEffect(() => {
     const fetchFeaturedBlog = async () => {
       try {
-        const response = await getFeaturedBlog();
-        console.log(response); 
+        const response = await getRequestFunc('client/featuredBlog');
         if (response.status === 404) {
           throw new Error(`HTTP error! ${response.data}`);
         }
@@ -58,7 +56,7 @@ const FeaturedBlog = () => {
   return (
     <div id="featured-blog-div">
         <p>Featured Blog</p>
-        <Link to={`/blogs/${blog._id}`} className="featured-blog-link"> {/* Wrap with Link */}
+        <Link to={`/client/blog/${blog._id}`} className="featured-blog-link"> {/* Wrap with Link */}
           <div className="featured-blog">
             <div className="blog-header">
               <h2>{blog.title}</h2>
