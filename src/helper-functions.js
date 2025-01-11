@@ -232,3 +232,14 @@ export function postEditorReq(){
     });
 }
 
+export function getBlogsByAuthor(authorId){
+    return axios.get(`${baseURL}client/bloggers/${authorId}`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
+}
+

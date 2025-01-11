@@ -2,12 +2,9 @@ import { useEffect, useState } from "react"
 import './notifications.css'
 import { useOutletContext } from "react-router-dom";
 import { deleteNotification, getRequestFunc } from "../helper-functions";
-import { setDate } from "date-fns";
-import { FaCross } from "react-icons/fa";
-import { FaX } from "react-icons/fa6";
 
 export default function Notifications(){
-    const [activeTab, setTab] = useState('news');
+    const [activeTab, setTab] = useState('notifications');
     const [error, setError] = useState(null);
     const [news, setNews] = useState([]);
     const [notifications, setNotifications] = useState([])

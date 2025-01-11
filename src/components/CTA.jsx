@@ -10,23 +10,30 @@ export default function Cta(){
 
     useEffect(()=>{
         const getReqStatus = async()=>{
-            if(!user.isEditor){try{
-                const resp = await getRequestFunc('client/EditorReqStatus');
-                console.log(resp);
-                if(!(resp.status === 200)){
-                    throw new Error(resp.data);
-                } setreqStatus(resp.data);
-            }catch(err){
-                setError(err.message);
-            } finally {
+            if(user){    
+                if(!user.isEditor){
+                    try {
+                    const resp = await getRequestFunc('client/EditorReqStatus');
+                    console.log(resp);
+                    if(!(resp.status === 200)){
+                        throw new Error(resp.data);
+                    } setreqStatus(resp.data);
+                }catch(err){
+                    setError(err.message);
+                } finally {
+                    setLoading(false);
+                }} else {
+                    setLoading(false);
+                }
+            } else {
                 setLoading(false);
-            }}
-        } 
+            }
+        }
         getReqStatus();
     },[]);
 
     const handleApply = async ()=>{
-        if(!error){
+        if((!error) && user){
             setreqStatus(0);
             try{
                 const resp = await postEditorReq();

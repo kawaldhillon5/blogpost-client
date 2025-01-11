@@ -51,7 +51,7 @@ const FeaturedBlog = () => {
     return tempDiv.textContent || tempDiv.innerText || "";
   }
 
-  const truncatedBody = truncateText(removeHtmlTags(blog.body), 350); // Truncate to 200 characters
+  const truncatedBody = truncateText(removeHtmlTags(blog.body),200); // Truncate to 200 characters
 
   return (
     <div id="featured-blog-div">
