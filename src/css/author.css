@@ -1,0 +1,73 @@
+.blogger-main-div {
+    height: 85%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 20px auto;
+    background-color: #282828;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    align-items: center; 
+  }
+  
+  .bloger-details-div {
+    width: 90%;
+    padding: 20px;
+    color: #fff; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .blogger-name-div {
+    margin-bottom: 15px;
+    
+  }
+  
+  .blogger-name-div h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .blogger-description-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+.blogger-blogs-div{
+  position: relative;
+    width: 90%;
+    overflow: auto;
+}
+
+.blogger-blogs-div button {
+    margin-left: 40%;
+}
+
+.loading-blogs-author{
+  position: absolute;
+  left: -20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-size: 150%;
+  height: 110%;
+  width: 110%;
+  backdrop-filter: blur(10px);
+}
+
+.loader-blogs-author{
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}

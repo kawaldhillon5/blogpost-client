@@ -30,7 +30,8 @@
 }
 
 .content{
-  overflow: auto;
+  overflow-y: auto;
+  overflow-X: hidden;
   height: 90%;
 }
 
@@ -50,7 +51,12 @@
 }
 
 .blog-list, .author-list {
+  position: relative;
   padding: 10px;
+}
+
+.blog-list >button{
+  margin-left: 45%;
 }
 
 .blog-preview {

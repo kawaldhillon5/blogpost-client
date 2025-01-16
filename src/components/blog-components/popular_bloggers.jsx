@@ -8,26 +8,31 @@ function PopularBloggers({ ErrorComponent }) {
   const [popularAuthors, setPopularAuthors] = useState([]);
   const [hasError, setHasError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingList, setLoadingList] = useState(true);
+  const [skip, setSkip] = useState(0);
+
 
   useEffect(() => {
-    async function popularAuthors() {
+    async function getpopularAuthors() {
+      setLoadingList(true);
         try {
-            const response = await getPopularAuthors();
+            const response = await getPopularAuthors(skip, 5);
             console.log(response);  
             if (response.status === 404) {
                 throw new Error(response.data);
             } else {
-                setPopularAuthors(response.data);
+                setPopularAuthors([...popularAuthors,...response.data]);
             }
         } catch (error) {
             console.error('Error fetching popular Bloggers:', error);
             setHasError(true);
         }
         finally {
+            setLoadingList(false);
             setLoading(false);
         }
-    } popularAuthors();
-  }, []);
+    } getpopularAuthors();
+  }, [skip]);
 
   if (loading) {
     return <div className="loading-blogs"><div className="loader-blogs"></div></div>; 
@@ -41,6 +46,7 @@ function PopularBloggers({ ErrorComponent }) {
 
   return (
     <div className="author-list">
+      {loadingList && <div className="loading-blogs-author"><div className="loader-blogs-author"></div></div>}
       <h2>Popular Bloggers</h2>
       <ul>
         {popularAuthors.map((author) => (
@@ -59,6 +65,7 @@ function PopularBloggers({ ErrorComponent }) {
           </li>
         ))}
       </ul>
+      {<button onClick={() => setSkip(skip + 5)}>Load More</button>}
     </div>
   );
 }

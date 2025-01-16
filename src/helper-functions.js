@@ -169,9 +169,9 @@ export  async function searchBlogs(query){
     } 
 }
 
-export async function getPopularAuthors() {
+export async function getPopularAuthors(skip, limit) {
     try {
-        const res = await axios.get(`${baseURL}client/authors/popularAuthors`);
+        const res = await axios.get(`${baseURL}client/authors/popularAuthors`,{params: {limit: limit, skip: skip}});
         return res;
     } catch (err) {
         console.log(err);
@@ -179,9 +179,9 @@ export async function getPopularAuthors() {
     } 
 }
 
-export async function getNewBlogs() {
+export async function getNewBlogs(skip, limit) {
     try {
-        const res = await axios.get(`${baseURL}client/blogs/newBlogs`);
+        const res = await axios.get(`${baseURL}client/blogs/newBlogs`, {params: {limit: limit, skip: skip}});
         return res;
     } catch (err) {
         console.log(err);
@@ -189,9 +189,9 @@ export async function getNewBlogs() {
     } 
 }
 
-export async function getPopularBlogs() {
+export async function getPopularBlogs(skip, limit) {
     try {
-        const res = await axios.get(`${baseURL}client/blogs/popularBlogs`);
+        const res = await axios.get(`${baseURL}client/blogs/popularBlogs`, {params: {limit: limit, skip: skip}});
         return res;
     } catch (err) {
         console.log(err);
@@ -232,8 +232,8 @@ export function postEditorReq(){
     });
 }
 
-export function getBlogsByAuthor(authorId){
-    return axios.get(`${baseURL}client/bloggers/${authorId}`)
+export function getBlogsByAuthor(authorId, limit, skip){
+    return axios.get(`${baseURL}client/bloggers/${authorId}`, {params: {limit: limit, skip: skip}})
     .then((res)=> {
         return res;
     })
@@ -242,4 +242,16 @@ export function getBlogsByAuthor(authorId){
         return error.response;
     });
 }
+
+export function getAuthorDetails(authorId){
+    return axios.get(`${baseURL}client/blogger/${authorId}`)
+    .then((res)=> {
+        return res;
+    })
+    .catch((error)=>{
+        console.log(error)
+        return error.response;
+    });
+}
+
 

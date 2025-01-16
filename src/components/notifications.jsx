@@ -25,6 +25,13 @@ export default function Notifications(){
     }
 
     useEffect(()=>{
+        if(!user){
+            setError(null);
+            setTab('news');
+        }
+    },[activeTab]);    
+
+    useEffect(()=>{
         const getData = async () =>{
             try{
                 setLoading(true);
@@ -34,9 +41,13 @@ export default function Notifications(){
                         setNews(response.data);
                     } else {
                         setNotifications(response.data.notifications)
-                    }}else {
+                }}else {
+                    if(response.status === 500){
+                        throw new Error('Server Error');
+                    } else {
                         throw new Error(response.data);
                     }
+                }
             } catch (err) {
                 setError(err.message);
             } finally {

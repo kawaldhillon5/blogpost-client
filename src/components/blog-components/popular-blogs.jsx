@@ -8,26 +8,30 @@ export default function PopularBlogs({ErrorComponent}){
     const [popularBlogs, setPopularBlogs] = useState([]);
     const [hasError, setHasError] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [loadingList, setLoadingList] = useState(true);
+    const [skip, setSkip] = useState(0);
 
     useEffect(() => {
-        async function popularBlogs() {
+        async function getpopularBlogs() {
+            setLoadingList(true);
             try {
-                const response = await getPopularBlogs();
+                const response = await getPopularBlogs(skip, 5);
                 console.log(response);  
                 if (response.status === 404) {
                     throw new Error(response.data);
                 } else {
-                    setPopularBlogs(response.data);
+                    setPopularBlogs([...popularBlogs, ...response.data]);
                 }
             } catch (error) {
                 console.error('Error fetching popular Blogs:', error);
                 setHasError(true);
             }
             finally {
+                setLoadingList(false);
                 setLoading(false);
             }
-        } popularBlogs();
-    }, []);
+        } getpopularBlogs();
+    }, [skip]);
 
     if (loading) {
         return <div className="loading-blogs"><div className="loader-blogs"></div></div>; 
@@ -41,6 +45,7 @@ export default function PopularBlogs({ErrorComponent}){
 
     return (
         <div className="blog-list">
+            {loadingList && <div className="loading-blogs-author"><div className="loader-blogs-author"></div></div>}
             <h2>Popular Blogs</h2>
             {popularBlogs.map((blog) => (
                 <div key={blog._id} className="blog-preview">
@@ -51,6 +56,7 @@ export default function PopularBlogs({ErrorComponent}){
                     <p>By: {blog.author?.first_name} {blog.author?.last_name}</p>
                 </div>
             ))}
+            {<button onClick={() => setSkip(skip + 5)}>Load More</button>}
         </div>
     );
 }
