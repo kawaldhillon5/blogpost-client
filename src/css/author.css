@@ -41,8 +41,8 @@
 
 .blogger-blogs-div{
   position: relative;
-    width: 90%;
-    overflow: auto;
+  width: 90%;
+  overflow: auto;
 }
 
 .blogger-blogs-div button {

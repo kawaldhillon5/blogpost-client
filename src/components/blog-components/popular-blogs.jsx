@@ -16,7 +16,6 @@ export default function PopularBlogs({ErrorComponent}){
             setLoadingList(true);
             try {
                 const response = await getPopularBlogs(skip, 5);
-                console.log(response);  
                 if (response.status === 404) {
                     throw new Error(response.data);
                 } else {

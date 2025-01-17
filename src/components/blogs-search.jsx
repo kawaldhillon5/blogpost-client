@@ -9,16 +9,19 @@ import { searchBlogs } from '../helper-functions';
 const BlogSearch = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResultsBlogs, setsearchResultsBlogs] = useState([]);
+    const [searchResultsBloggers, setsearchResultsBloggers] = useState([]);
+    const [searchResultsReqs, setsearchResultsReqs] = useState([]);
     const [isLoading, setIsLoading] = useState(false); // Loading state
     const searchResultsRef = useRef(null);
     const inputRef = useRef(null);
     const [isFocused, setIsFocused] = useState(false);
 
     const handleSearch = async (query) => {
-        console.log("handleSearch called with:", query);
         if (!query) {
-            setSearchResults([]);
+            setsearchResultsBlogs([]);
+            setsearchResultsBloggers([]);
+            setsearchResultsReqs([]);
             setIsLoading(false); // Stop loading if query is empty
             return;
         }
@@ -27,16 +30,29 @@ const BlogSearch = () => {
 
         try {
             const response = await searchBlogs(query);
-            const data = await response.data
-            if(data.length){
-                setSearchResults(data);
+            console.log(response.data);
+            const data = await response.data;
+            if(data.blogs.length){
+                setsearchResultsBlogs(data.blogs);
             } else {
-                setSearchResults([null]);
+                setsearchResultsBlogs([null]);
+            }
+
+            if(data.bloggers.length){
+                setsearchResultsBloggers(data.bloggers);
+            } else {
+                setsearchResultsBloggers([null]);
+            }
+
+            if(data.reqs.length){
+                setsearchResultsReqs(data.reqs);
+            } else {
+                setsearchResultsReqs([null]);
             }
             
         } catch (error) {
             console.error('Error searching blogs:', error);
-            setSearchResults([]);
+            setsearchResultsBlogs([]);
         } finally {
             setIsLoading(false); // Stop loading regardless of success/failure
         }
@@ -86,18 +102,59 @@ const BlogSearch = () => {
                     {isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faSearch} />}
                 </button>
             </div>
-            { isFocused &&  searchResults.length > 0 && (
-                <ul className="search-results" ref={searchResultsRef}>
-                    { searchResults[0] === null ? <li key={1} className="search-result-item">No Results found</li>  
-                        :
-                            searchResults.map(blog => (
-                            <li key={blog._id} className="search-result-item">
-                                <a  href={`/client/blog/${blog._id}`}>{blog.title}  <div className="search-result-item-author">-{blog.author.first_name} {blog.author.last_name}</div></a>
-                            </li>
-                        ))
+                {  isFocused && (searchResultsBlogs.length > 0 || searchResultsBloggers.length > 0 || searchResultsReqs.length>0) &&   
+                <div className='search-results' ref={searchResultsRef}>
+                    { isFocused &&  searchResultsBlogs.length > 0 && (
+                        <div className='search-result-div'>
+                            <div className='search-result-div-header'>Blogs</div>
+                            <ul className="search-results-list" >
+                                { searchResultsBlogs[0] === null ? <li key={1} className="search-result-item">No Blogs found</li>  
+                                    :
+                                        searchResultsBlogs.map(blog => (
+                                        <li key={blog._id} className="search-result-item">
+                                            <a  href={`/client/blog/${blog._id}`}>{blog.title}  <div className="search-result-item-author">-{blog.author.first_name} {blog.author.last_name}</div></a>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                        )
                     }
-                </ul>
-            )}
+                    { isFocused &&  searchResultsBloggers.length > 0 && (
+                        <div className='search-result-div'>
+                            <div className='search-result-div-header'>Bloggers</div>
+                            <ul className="search-results-list" >
+                                { searchResultsBloggers[0] === null ? <li key={1} className="search-result-item">No Bloggers found</li>  
+                                    :
+                                        searchResultsBloggers.map(blogger => (
+                                        <li key={blogger._id} className="search-result-item">
+                                            <a  href={`/blogger/${blogger._id}`}>{blogger.first_name} {blogger.last_name}</a>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                        )
+                    }
+                    {
+                        isFocused && searchResultsReqs.length > 0 && (
+                            <div className='search-result-div'>
+                                <div className='search-result-div-header'>Requests</div>
+                                <ul className="search-results-list" >
+                                    { searchResultsReqs[0] === null ? <li key={1} className="search-result-item">No Requests found</li>  
+                                        :
+                                            searchResultsReqs.map(req => (
+                                            <li key={req._id} className="search-result-item">
+                                                <a  href={`/client/request/${req._id}`}>{req.title}</a>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                        )
+                    }
+                </div>
+                }  
         </div>
     );
 };
