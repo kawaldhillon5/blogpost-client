@@ -17,6 +17,7 @@ import SignUp , {action as signUpAction}  from "./routes/auth-routes/signUp";
 import LogIn, {action as logInAction} from "./routes/auth-routes/logIn";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Author, {loader as authorLoader} from "./routes/author";
+import EditBlog, {loader as editBlogLoader} from "./routes/editBlog";
 
 const router = createBrowserRouter([
   {
@@ -76,7 +77,11 @@ const router = createBrowserRouter([
             element: <CreateBlogRequest />,
             action: createBlogRequestAction,
           },
-          
+          {
+            path: "editor/blog/:mode/:id",
+            element: <EditBlog />,
+            loader: editBlogLoader,
+          },
         ]
       },
     ]

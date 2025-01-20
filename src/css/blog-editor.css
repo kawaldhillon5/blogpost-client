@@ -1,0 +1,116 @@
+
+#blog_edit_div {
+    width: 90%;
+    height: 95%;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #282828;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.edit-blog-header{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 0%;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.edit-blog-header > div{
+    font-size: 200%;
+    font-weight: 600;
+}
+
+#blog_edit_form{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.input-group { 
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ddd;
+    font-weight: 500;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #eee;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input[type="text"]:focus {
+    border-color: #777;
+    box-shadow: 0 0 8px rgba(100, 100, 100, 0.3);
+}
+
+#body_edit_div label {
+    margin-bottom: 8px;
+    color: #ddd;
+    font-weight: 500;
+}
+
+
+#blog_edit_btns {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+#blog_edit_btns button {
+    padding: 12px 25px;
+    margin-left: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#blog_edit_btns button:hover {
+    background-color: #777;
+}
+
+#body_edit_div { 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column;
+}
+
+#body_edit_div .tinymce-container { 
+    flex-grow: 1; 
+    border: 1px solid #555;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+#body_edit_div .tox {
+    background-color: #333 !important;
+    border: none !important;
+    color: #eee !important;
+    height: 100% !important; 
+    box-sizing: border-box;
+}

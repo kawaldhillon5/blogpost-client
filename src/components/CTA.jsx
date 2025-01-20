@@ -57,7 +57,7 @@ export default function Cta(){
                 user.isEditor ? (
             <div>
                 <h2>Ready to Share Your Thoughts?</h2>
-                <Link to="/create-blog" className="write-blog-button">Write Your Blog</Link>
+                <Link to="/editor/blog/new/0" className="write-blog-button">Write Your Blog</Link>
             </div>
             ) :
             (

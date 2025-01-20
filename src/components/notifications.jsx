@@ -34,18 +34,20 @@ export default function Notifications(){
     useEffect(()=>{
         const getData = async () =>{
             try{
-                setLoading(true);
-                let response =  await getRequestFunc(`client/${activeTab}`);
-                if(response.status === 200){ 
-                    if(activeTab === 'news'){
-                        setNews(response.data);
-                    } else {
-                        setNotifications(response.data.notifications)
-                }}else {
-                    if(response.status === 500){
-                        throw new Error('Server Error');
-                    } else {
-                        throw new Error(response.data);
+                if(user){
+                    setLoading(true);
+                    let response =  await getRequestFunc(`client/${activeTab}`);
+                    if(response.status === 200){ 
+                        if(activeTab === 'news'){
+                            setNews(response.data);
+                        } else {
+                            setNotifications(response.data.notifications)
+                    }}else {
+                        if(response.status === 500){
+                            throw new Error('Server Error');
+                        } else {
+                            throw new Error(response.data);
+                        }
                     }
                 }
             } catch (err) {
