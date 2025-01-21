@@ -1,0 +1,87 @@
+#noti-main-div{
+    height: 65%;
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+#noti-tabs{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+#noti-tabs button {
+    background-color: #444;
+    color: rgb(34, 34, 34);
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#noti-tabs button.active {
+    background-color: #82d7f7;
+}
+
+#noti-content{
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#notifications-content, #news-content {
+    height: 95%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#noti-content-list, #news-content-list{
+    position: relative;
+    flex: 1;
+    height: 95%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 5px 10px 5px 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: baseline;
+    gap: 20px;
+}
+
+.noti-content-item{
+    font-size: 100%;
+    background-color: #444;
+    border-radius: 8px;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    transition: transform 300ms ease-in;
+}
+.noti-content-item>p {
+    flex: 1;
+}
+
+.noti-content-item> button {
+    position: relative;
+    z-index: 3;
+    background-color: #5f5f5f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noti-dismissed{
+    position: relative;
+    transform: translateX(150%);
+}

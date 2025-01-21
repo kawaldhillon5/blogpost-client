@@ -3,7 +3,6 @@
     overflow: auto;
     gap: 2%;
     height: 85%;
-    width: 90%;
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -29,14 +28,14 @@
   }
   
 #blog_req_items_div{
-   overflow: auto;
+    overflow: auto;
     height: 100%;
     width: 90%;
     padding: 0%;
     display: grid;
-    grid-template-rows: repeat(5 ,1fr);
-    grid-template-columns: repeat(auto-fit, minmax(25vh, 1fr));
-    gap: 1%;
+    grid-template-columns: repeat(2 ,1fr);
+    grid-template-rows: repeat(auto-fit, minmax(15vh, 1fr));
+    gap: 10px;
     justify-items: center;
     align-items: start;
     list-style: none;
@@ -55,7 +54,7 @@
   }
 
   .blog_req_list_item{
-    width: 90%;
+    width: 93.5%;
     background-color: #f9f9f911;
     border-radius: 10px;
     padding: 3%;
@@ -87,7 +86,7 @@
     margin: 1%;
   }
   
-  .blog_req_item_user{
+  .blog_req_item_user_date{
     margin-left: auto;
     font-size: small;
     font-style: italic;

@@ -1,9 +1,16 @@
-import { NavLink, Link, Outlet, useLoaderData, Navigate, useNavigate, redirect, Form} from "react-router-dom";
+import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form, useLocation, useNavigation} from "react-router-dom";
 import { getUser, LogOut } from "../helper-functions";
-import { useEffect, useState } from "react";
+import BlogSearch from "../components/blogs-search";
+import '../css/scrollbar.css'
 
-export async function action() {
+export async function action({request, params}) {
+    const formData = await request.formData();
     await LogOut();
+    const previousLocation = JSON.parse(formData.get('previousLocation'));
+    console.log(previousLocation);
+    if (previousLocation) {
+        return redirect(`${previousLocation}`)
+    }
     return redirect('/');
 }   
 
@@ -13,7 +20,6 @@ export async function loader() {
 
     try{
         const res = await getUser();
-        console.log(res);
         if(res){
             if(res.status === 200){
                 user = res
@@ -36,22 +42,34 @@ export default function Root(){
 
     const user = useLoaderData();
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const navigation = useNavigation();
 
    const handleLogIn = () => {
-       navigate('authenticate/logIn');
+       navigate('authenticate/logIn', {state: {from:location.pathname}});
    }
 
 
 
     return (
-        <>
+        <>  
+            <div>
+                {navigation.state === 'loading' && <div className="loading-bar"></div>}
+                {/* ... your other content ... */}
+            </div>
             <div id="header">
-                <Link to={"/"} id="header_heading">blog</Link>
-                <form>
-                    <input type="search" placeholder="Search Blogs and Requests here" name="header_search"></input>
-                </form>
+                <Link to={"/"} id="header_heading">Blog</Link>
+                <BlogSearch />
                 <div id="header_links">
+                    {user && 
+                        <NavLink className={({ isActive, isPending }) =>
+                            isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : ""
+                        } to={`/editor/myBlogs`}>MyBlogs</NavLink>
+                    }
                     <NavLink className={({ isActive, isPending }) =>
                       isActive
                         ? "active"
@@ -73,7 +91,12 @@ export default function Root(){
                         ? "pending"
                         : ""
                     } to={`/editor/about`}>About</NavLink>
-                    {user ? <Form method="post"><button type="submit">Log Out</button></Form> : <button onClick={handleLogIn}>Log In</button>}
+                    {user ? <Form method="post">
+                        <button type="submit">Log Out</button>
+                        <input type="hidden" name="previousLocation" value={JSON.stringify(location.pathname|| '/')} />
+                        </Form> : 
+                        <button onClick={handleLogIn}>Log In</button>
+                    }
                 </div>
             </div>
             <div id="content">
@@ -86,3 +109,5 @@ export default function Root(){
         </>
     )
 }
+
+

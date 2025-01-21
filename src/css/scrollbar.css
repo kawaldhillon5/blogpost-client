@@ -1,0 +1,20 @@
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+    height: 8px; /* Height of the scrollbar (for horizontal scrollbars) */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f100; /* Color of the tracking area */
+    border-radius: 4px; /* Rounded corners for the track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners for the thumb */
+    border: 2px solid transparent; /* Add a transparent border */
+    background-clip: padding-box; /* To make the border appear inside */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker color on hover */
+  }

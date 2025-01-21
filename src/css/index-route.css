@@ -1,131 +1,3 @@
-#index_div,#login_div,#sign_up_div{
-    background-color: #f9f9f911;
-    border-radius: 10px;
-    padding: 3%;
-    display: flex;
-    margin: 3%;
-    height: 73%;
-  }
-  
-  #index_left_side,#left_login_div,#left_signup_div{
-    display: flex;
-    justify-content:center ;
-    align-items: center;
-    height: 100%;
-    width: 50%;
-  }
-  
-  #index_right_side,#right_login_div,#right_signup_div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 50%;
-    flex-direction: column;
-  }
-  
-  #docu_img{
-    height: 100%;
-    object-fit: contain;
-    border-radius: 10px;
-  }
-  
-  #index_div_wlcm_msg{
-    font-size: 200%;
-    text-align: center;
-  }
-  
-  #index_user_name{
-    font-size: 200%;
-    font-style: italic;
-  }
-  
-  #auth_form_div{
-    font-size: 200%;
-  }
-  
-  #log_in_form,#signup_form{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #signup_form{
-    width: 70%;
-  }
-  
-  #form_input_div_login,#form_input_div_signup{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  #login_fieldset{
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #signup_fieldset{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 95%;
-    font-size: 120%;
-    border-radius: 15px;
-    margin-bottom: 2%;
-  }
-  
-  fieldset>input{
-    font-size: 100%;
-    width: 40%;
-    margin-left: 3%;
-    border: none;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    border-radius: 5px;
-    background-color: #f9f9f911;
-  }
-
-  #signup_fieldset>input{
-    width: 70%;
-  }
-
-  #header_links>.active{
-    color: #f9f9f9;
-  }
-  
-  #header_links>.pending{
-    text-decoration: underline;
-  }
-.signup_in_group{
-  width: 100%;
-  display: flex;
-  margin-bottom: 4%;
-}
-
-.signup_in_group>label{
-  width: 40%;
-}
-
-.signup_in_group>input{
- width: 50%;
- font-size: 100%;
-}
-
-.login_in_group{
-  width: 45%;
-  margin: 2%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.login_in_group>input{
-  width: 70%;
-  font-size: 100%;
-}
 
 #footer{
   width: 100%;
@@ -135,6 +7,91 @@
 }
 
 #footer>span{
-  margin-right: 4px;
+  margin-right: 5px;
   font-style: italic;
+}
+
+.home-page-container{
+  width: 90%;
+  height: 88%;
+  margin: auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+#blogs-container-home {
+  width: 70%;
+  height: 95%;
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 8px;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+.call-to-action {
+  height: 100%;
+  max-width: 30%;
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.call-to-action>div {
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center; /* Center the content */
+  color: #eee;
+
+}
+
+.call-to-action h2 {
+    margin-bottom: 20px;
+}
+
+/* .call-to-action p {
+    margin-bottom: 30px;
+} */
+
+.write-blog-button, .auth-button {
+  text-decoration: none;
+  display: inline-block;
+  background-color: #61dafb; /* React blue */
+  color: #000000;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  margin: 0 10px;
+}
+
+.write-blog-button:hover, .auth-button:hover {
+  background-color: #5daeda;
+  transform: scale(1.03);
+  color: #000000;
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#cta-loading-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,29 +1,29 @@
-import { Link, useOutletContext } from "react-router-dom"
-import documImg from "../assets/images/document-Img.jpg"
+import {  useOutletContext } from "react-router-dom"
 import "../css/index-route.css"
 
+import Welcome from "../components/welcome";
+import FeaturedBlog from "../components/featured-blog";
+import Notifications from "../components/notifications";
+import Cta from "../components/CTA";
+
+export async function loader() {
+
+    return null; 
+}
 export default function Index(){
 
     const user = useOutletContext();
-    console.log(user);
+
     return (
-        <div id="index_div">
-            <div id="index_left_side">
-                <img id="docu_img" src={documImg}></img>
+
+        <div className="home-page-container">
+            <div id="blogs-container-home">
+            <Welcome />
+            <FeaturedBlog />   
             </div>
-            <div id="index_right_side">
-                <div id="index_div_wlcm_msg">
-                    Welcome to the Blog Site
-                </div>
-                {
-                    (user === null) ?
-                    <div id="auth_form_div">
-                        <Link to={'/authenticate/logIn'} className="auth_link">Log In</Link>
-                        <p>Or</p>
-                        <Link to={'/authenticate/signUp'} className="auth_link">Sign Up</Link>
-                    </div> :
-                    <div id="index_user_name">{user.username}</div>
-                }
+            <div className="call-to-action">
+                <Cta />
+                <Notifications />
             </div>
         </div>
     )

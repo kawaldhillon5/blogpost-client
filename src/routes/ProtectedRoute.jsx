@@ -9,7 +9,8 @@ export default function ProtectedRoute() {
     useEffect(()=>{
          function fun(){
             const res = user;
-            if(res.user === null) {
+            console.log(res);
+            if(res === null) {
                 navigate('/authenticate/logIn', {replace: true});
             }
     } fun()

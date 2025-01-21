@@ -91,7 +91,6 @@ button:focus-visible {
 }
 
 #header_heading{
-  flex: 1;
   padding:1%;
   font-size: 200%;
 }
@@ -108,4 +107,25 @@ button:focus-visible {
   overflow: auto;
   width: 100%;
   height: 100%;
+  align-content: center;
+}
+
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px; 
+  background-color: rgb(10, 123, 253); 
+  z-index: 9999;
+  animation: loading 1s linear infinite; 
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
