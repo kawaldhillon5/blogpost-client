@@ -4,6 +4,7 @@ import HtmlParser from "react-html-parser";
 import "../css/blog-detail.css";
 import { useEffect } from "react";
 import ReqVoteComponent from "../components/request-vote";
+import warningSvg from "../assets/images/warning-filled-svgrepo-com.svg";
 
 export async function action({request,params}) {
     const formData = await request.formData();
@@ -16,26 +17,55 @@ export async function action({request,params}) {
 }
 
 export async function loader({params}){
-    const blog = await getBlog(params.blogId);
-    const comments = await getComments(params.blogId);
-    return {blog, comments};
+    let error = null;
+    let blog = null;
+    let comments = null;
+    try{
+        const respBlog = await getBlog(params.blogId);
+        const commentsResp = await getComments(params.blogId);
+        comments = commentsResp;
+        if(respBlog.status === 200){
+            blog = respBlog.data;
+        } else {
+            throw new Error(respBlog.data);
+        }
+    }catch(err){
+        error = err.message;
+    }
+    return {blog, comments, error};
 }
 
 export default function Blog(){
-    const {blog, comments} = useLoaderData();
+    const {blog, comments, error} = useLoaderData();
     const fetcher = useFetcher(); 
     const user = useOutletContext();
 
     useEffect(()=>{
-        if(user) {
+
+        if(user && blog) {
             document.querySelector("#comment_form_in").value = "";
         }
     });
 
     useEffect(()=>{
-        const tags = document.querySelectorAll('.tag_div');
-        styleTags(tags);
+        if(blog){
+            const tags = document.querySelectorAll('.tag_div');
+            styleTags(tags);
+        }
     },[]);
+
+    if(error){
+        return (
+            <div id="blog_error_div_client">
+                <img 
+                    src= {warningSvg}
+                    alt="Caution Icon" 
+                    className="caution-icon" 
+                /> 
+                <div>{error}</div>
+            </div>
+        )
+    }
 
     return (
 
@@ -96,7 +126,7 @@ const Comment = ({ text, date_created, madeBy }) => {
   
     return (
       <div className="comment">
-        <div className="comment-header"> {/* New header section */}
+        <div className="comment-header">
           <span className="comment-author">
             {/* Display "Anonymous" if madeBy is not available or not a valid ObjectId */}
             {madeBy.userName || "Anonymous"}

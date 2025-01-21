@@ -61,6 +61,15 @@ export default function Root(){
                 <Link to={"/"} id="header_heading">Blog</Link>
                 <BlogSearch />
                 <div id="header_links">
+                    {user && 
+                        <NavLink className={({ isActive, isPending }) =>
+                            isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : ""
+                        } to={`/editor/myBlogs`}>MyBlogs</NavLink>
+                    }
                     <NavLink className={({ isActive, isPending }) =>
                       isActive
                         ? "active"

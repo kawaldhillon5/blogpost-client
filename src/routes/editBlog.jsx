@@ -1,13 +1,27 @@
-import { Link, redirect, useLoaderData, useSubmit, Form } from "react-router-dom";
-// import { getBlog, postBlogData, postFinishedblog } from "../helper-functions/functions";
+import { Link, redirect, useLoaderData, useSubmit, Form, useActionData } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState} from "react";
 import "../css/blog-editor.css";
-import { set } from "lodash";
+import { getBlogEditor, postBlogData } from "../helper-functions";
+
+
+export async function action({request, params}){
+    const formData = await request.formData();
+    const tagsArray = formData.get("blog_tags").split(',');
+    const tagsArrayTrimmed = tagsArray.map(tag => {
+        return tag.trim();
+    });
+   
+    const resp = await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit"), tags: tagsArrayTrimmed}, params.blogId, formData.get("button"));
+    if(resp){
+        return redirect(`/editor/blog/edit/${resp}`);
+    }
+    return "Something went wrong";
+}
 
 export async function loader({params}) {
     const mode = params.mode;
-    const blog = mode === "new" ? {title: "", body: "", tags: []} : {title: "", body: "", tags: []};
+    const blog = mode === "new" ? {title: "", body: "", tags: []} : await getBlogEditor(params.blogId);
     return {blog, mode};
 }
 
@@ -16,6 +30,8 @@ export default function EditBlog() {
     const {blog, mode}= useLoaderData();
     const [title, setTitle] = useState(blog.title);
     const [tags, setTags] = useState(blog.tags.toString());
+    const actionData = useActionData();
+    console.log(actionData);
     const editorRef = useRef(null);
     const submit = useSubmit();
     const getMCEData = () => {
@@ -95,18 +111,18 @@ export default function EditBlog() {
                         e.preventDefault();
                         let formData = new FormData();
                         formData.append("blog_body_edit", getMCEData());
-                        formData.append("blog_title_edit", document.querySelector("#edit_title_input").value);
-                        formData.append("blog_tags", document.querySelector("#edit_tags_input").value);
-                        formData.append("save_button", true);
+                        formData.append("blog_title_edit", title);
+                        formData.append("blog_tags", tags);
+                        formData.append("button", 'save');
                         submit(formData, { method: "post" });
                     }}>Save</button>
                     <button type="button" onClick={(e) => {
                         e.preventDefault();
                         let formData = new FormData();
                         formData.append("blog_body_edit", getMCEData());
-                        formData.append("blog_title_edit", document.querySelector("#edit_title_input").value);
-                        formData.append("blog_tags", document.querySelector("#edit_tags_input").value);
-                        formData.append("finish_button", true);
+                        formData.append("blog_title_edit", title);
+                        formData.append("blog_tags", tags);
+                        formData.append("button", "finish");
                         submit(formData, { method: "post" });
                     }}>Finish</button>
                 </div>

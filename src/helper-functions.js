@@ -18,10 +18,11 @@ export async function getBlog(blogId){
     
     return await axios.get(`${baseURL}client/blog/${blogId}`)
     .then((response) => {
-        return response.data.post;
+        return response;
     })
     .catch(function(error){
         console.log(error);
+        return error.response;
     });
 }
 
@@ -254,4 +255,33 @@ export function getAuthorDetails(authorId){
     });
 }
 
+export async function postBlogData(data, blogId, mode){
+    return await axios.post(`${baseURL}editor/updateBlog/${blogId}/${mode}`, data)
+    .then((response) => {
+        return response.data.id;
+    })
+    .catch((error)=> {
+        console.log(error);
+    })
+}
 
+export async function getBlogEditor(blogId){
+    return await axios.get(`${baseURL}editor/blog/${blogId}`)
+    .then((response) => {
+        return response.data.post;
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+}
+
+export async function getMyBlogs(){
+    return await axios.get(`${baseURL}editor/myBlogPosts`)
+     .then((response) => {
+         return response.data.blogs;
+     })
+     .catch(function(error){
+         console.log(error);
+     });
+ }
+ 

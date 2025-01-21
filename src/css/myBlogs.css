@@ -137,3 +137,15 @@
     width: 40%;
     content: url('../assets//images/comment-svgrepo-com.svg');
 }
+
+#no_blogs_div_myBlogs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#no_blogs_div_myBlogs>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

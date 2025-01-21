@@ -14,7 +14,6 @@ export default function Cta(){
                 if(!user.isEditor){
                     try {
                     const resp = await getRequestFunc('client/EditorReqStatus');
-                    console.log(resp);
                     if(!(resp.status === 200)){
                         throw new Error(resp.data);
                     } setreqStatus(resp.data);
