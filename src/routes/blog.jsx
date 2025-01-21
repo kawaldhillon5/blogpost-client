@@ -1,5 +1,5 @@
-import { useFetcher, useLoaderData, useOutletContext, useSubmit } from "react-router-dom";
-import { formatDate, getBlog, getComments, isVotedByUser, postComment, postVote } from "../helper-functions"
+import { useFetcher, useLoaderData, useOutletContext } from "react-router-dom";
+import { formatDate, getBlog, getComments, postComment, postVote } from "../helper-functions"
 import HtmlParser from "react-html-parser";
 import "../css/blog-detail.css";
 import { useEffect } from "react";
@@ -39,7 +39,7 @@ export default function Blog(){
     const {blog, comments, error} = useLoaderData();
     const fetcher = useFetcher(); 
     const user = useOutletContext();
-
+    console.log(blog.tags)
     useEffect(()=>{
 
         if(user && blog) {
@@ -81,7 +81,7 @@ export default function Blog(){
                         <div id="blog_tags_div">
                             {
                               blog.tags.map(tag =>(
-                                <div className="tag_div">{tag}</div>
+                                tag.length ?<div className="tag_div">{tag}</div>: null
                               ))  
                             }
                         </div>
@@ -111,7 +111,7 @@ export default function Blog(){
                             comments.data.length ? 
                             <div id="comments_div_list">
                                 {comments.data.map((comment)=>(
-                                    <Comment text={comment.text} date_created={comment.date_created} madeBy={comment.madeBy} />
+                                    <Comment text={comment.text} date_created={comment.date_created} madeBy={comment.madeBy} key={comment._id} />
                                 ))
                                 }
                             </div> :
@@ -149,8 +149,6 @@ function styleTags(tagElements) {
       const randomColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${randomAlpha})`;
       const borderColor = `rgba(${randomRed}, ${randomGreen}, ${randomBlue}, ${1})`;
 
-  
-      // Apply styles
       tag.style.backgroundColor = randomColor;
       tag.style.border = `1px solid, ${borderColor}`
     });

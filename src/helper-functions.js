@@ -285,3 +285,13 @@ export async function getMyBlogs(){
      });
  }
  
+ export async function postDeleteBlogReq(blogId) {
+    return await axios.post(`${baseURL}editor/deleteBlog/${blogId}`)
+    .then((response)=>{
+        return response;
+    })
+    .catch((error)=>{
+        console.log(error);
+        return error.response;
+    });
+}

@@ -1,8 +1,8 @@
-import { Link, redirect, useLoaderData, useSubmit, Form, useActionData } from "react-router-dom";
+import { Link, redirect, useLoaderData, useSubmit, Form, useActionData, useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState} from "react";
 import "../css/blog-editor.css";
-import { getBlogEditor, postBlogData } from "../helper-functions";
+import { getBlogEditor, postBlogData, postDeleteBlogReq } from "../helper-functions";
 
 
 export async function action({request, params}){
@@ -31,7 +31,7 @@ export default function EditBlog() {
     const [title, setTitle] = useState(blog.title);
     const [tags, setTags] = useState(blog.tags.toString());
     const actionData = useActionData();
-    console.log(actionData);
+    const navigate =  useNavigate();
     const editorRef = useRef(null);
     const submit = useSubmit();
     const getMCEData = () => {
@@ -107,6 +107,15 @@ export default function EditBlog() {
                     </div>
                 </div>
                 <div id="blog_edit_btns">
+                    <button type="button" className="blog_btn" onClick={()=>{onClickDelete()}}>Delete</button>
+                    <dialog id="del_dia">
+                        <p>Delete This Blog ?</p>
+                        <div id="dia_btns">
+                            <button type="button" onClick={async ()=>{await diaClickYes(blog._id); navigate('/editor/myBlogs')}}>Yes</button>
+                            <button type="button" onClick={()=>{diaClickNo()}}>No</button>
+                        </div>
+                        <div id="del_dia_text"></div>
+                    </dialog>
                     <button type="button" onClick={(e) => {
                         e.preventDefault();
                         let formData = new FormData();
@@ -129,4 +138,29 @@ export default function EditBlog() {
             </Form>
         </div>
     )
+}
+
+
+function onClickDelete() {
+    const dia = document.querySelector("#del_dia");
+    dia.classList.add('show_dia');
+    dia.showModal();
+}
+
+async function diaClickYes(blogId) {
+    const dia = document.querySelector("#del_dia");
+    const diaText = document.querySelector("#del_dia_text")
+    const res = await postDeleteBlogReq(blogId);
+    diaText.textContent = res.data;   
+    setTimeout(()=>{
+        diaText.textContent = '';   
+        dia.classList.remove('show_dia');
+        dia.close();
+    }, 1000)
+}
+
+function diaClickNo() {
+    const dia = document.querySelector("#del_dia");
+    dia.classList.remove('show_dia');
+    dia.close();
 }

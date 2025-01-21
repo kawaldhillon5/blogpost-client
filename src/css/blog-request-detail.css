@@ -17,6 +17,7 @@
     justify-content: flex-start;
     width: 70%;
     height: 80%;
+    gap: 30px;
 }
 
 #blog_req_header_div{
