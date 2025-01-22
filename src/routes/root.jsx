@@ -2,6 +2,8 @@ import { NavLink, Link, Outlet, useLoaderData, useNavigate, redirect, Form, useL
 import { getUser, LogOut } from "../helper-functions";
 import BlogSearch from "../components/blogs-search";
 import '../css/scrollbar.css'
+import { useState } from "react";
+import MobileMenu from "../components/expandable-header-menu/expandable-header-menu";
 
 export async function action({request, params}) {
     const formData = await request.formData();
@@ -40,67 +42,81 @@ export async function loader() {
 
 export default function Root(){
 
+    const aspect = function(){
+        const res = ((window.innerHeight > 0) ? window.innerHeight : screen.height)/((window.innerWidth > 0) ? window.innerWidth : screen.width);
+        return (res > 0.72) ? false:true;
+    };
+    const [viewMode, setViewMode] = useState(aspect());
     const user = useLoaderData();
     const navigate = useNavigate();
     const location = useLocation();
     const navigation = useNavigation();
+
+   
+
+  
+    window.addEventListener('resize',()=>{
+        setViewMode(aspect());
+    });
 
    const handleLogIn = () => {
        navigate('authenticate/logIn', {state: {from:location.pathname}});
    }
 
 
-
+   console.log(user);
     return (
         <>  
             <div>
                 {navigation.state === 'loading' && <div className="loading-bar"></div>}
-                {/* ... your other content ... */}
             </div>
             <div id="header">
                 <Link to={"/"} id="header_heading">Blog</Link>
                 <BlogSearch />
-                <div id="header_links">
-                    {user && 
+                {viewMode  ?
+                    <div id="header_links">
+                        {user && 
+                            <NavLink className={({ isActive, isPending }) =>
+                                isActive
+                                ? "active"
+                                : isPending
+                                ? "pending"
+                                : ""
+                            } to={`/editor/myBlogs`}>MyBlogs</NavLink>
+                        }
                         <NavLink className={({ isActive, isPending }) =>
-                            isActive
+                        isActive
                             ? "active"
                             : isPending
                             ? "pending"
                             : ""
-                        } to={`/editor/myBlogs`}>MyBlogs</NavLink>
-                    }
-                    <NavLink className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    } to={`/client/allBlogPosts`}>Blogs</NavLink>
-                    <NavLink className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    }to={`/client/allBlogRequests`}>Blog Requests</NavLink>
-                    <NavLink className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    } to={`/editor/about`}>About</NavLink>
-                    {user ? <Form method="post">
-                        <button type="submit">Log Out</button>
-                        <input type="hidden" name="previousLocation" value={JSON.stringify(location.pathname|| '/')} />
-                        </Form> : 
-                        <button onClick={handleLogIn}>Log In</button>
-                    }
-                </div>
+                        } to={`/client/allBlogPosts`}>Blogs</NavLink>
+                        <NavLink className={({ isActive, isPending }) =>
+                        isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : ""
+                        }to={`/client/allBlogRequests`}>Blog Requests</NavLink>
+                        <NavLink className={({ isActive, isPending }) =>
+                        isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : ""
+                        } to={`/editor/about`}>About</NavLink>
+                        {user ? <Form method="post">
+                            <button type="submit">Log Out</button>
+                            <input type="hidden" name="previousLocation" value={JSON.stringify(location.pathname|| '/')} />
+                            </Form> : 
+                            <button onClick={handleLogIn}>Log In</button>
+                        }
+                    </div>
+                    : < MobileMenu user={user} handleLogIn={handleLogIn} location={location}/>
+                }
             </div>
             <div id="content">
-                <Outlet context={user}/>
+                <Outlet context={{user,viewMode}}/>
             </div>
             <div id="footer">
                 <span>By</span>

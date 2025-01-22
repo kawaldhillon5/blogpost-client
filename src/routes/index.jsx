@@ -5,26 +5,30 @@ import Welcome from "../components/welcome";
 import FeaturedBlog from "../components/featured-blog";
 import Notifications from "../components/notifications";
 import Cta from "../components/CTA";
+import FloatingButton from "../components/expandable-cta/expandable-cta";
 
 export async function loader() {
 
     return null; 
 }
 export default function Index(){
-
-    const user = useOutletContext();
+    const context = useOutletContext();
+    const viewMode = context.viewMode;
 
     return (
 
-        <div className="home-page-container">
-            <div id="blogs-container-home">
-            <Welcome />
-            <FeaturedBlog />   
+        <div className={viewMode ? "home-page-container": "home-page-container-mobile"}>
+            <div id={viewMode ? "blogs-container-home" : "blogs-container-home-mobile"}>
+                <Welcome />
+                <FeaturedBlog />   
             </div>
-            <div className="call-to-action">
+            {viewMode && <div className="call-to-action">
                 <Cta />
                 <Notifications />
-            </div>
+            </div>}
+            {
+                !viewMode && <FloatingButton />
+            }
         </div>
     )
 }

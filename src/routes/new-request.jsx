@@ -41,7 +41,7 @@ export default function CreateBlogRequest() {
             </div>
           </Form>
           {errors?.message && (
-            <p className="error-message">{errors.message}</p>
+            <p className="error-message-request">{errors.message}</p>
           )}
         </div>
       );

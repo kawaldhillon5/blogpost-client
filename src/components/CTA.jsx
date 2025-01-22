@@ -6,7 +6,8 @@ export default function Cta(){
     const [reqStatus, setreqStatus] = useState(4);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const user = useOutletContext();
+    const context = useOutletContext();
+    const user = context.user;
 
     useEffect(()=>{
         const getReqStatus = async()=>{

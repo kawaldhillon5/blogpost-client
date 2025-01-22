@@ -10,8 +10,8 @@ export default function Notifications(){
     const [notifications, setNotifications] = useState([])
     const [loading, setLoading] = useState(true);
 
-    const user = useOutletContext();
-
+    const context = useOutletContext();
+    const user = context.user;
     const handelDismiss = async (e, id)=>{
         e.stopPropagation();
         const item = e.target.parentNode;

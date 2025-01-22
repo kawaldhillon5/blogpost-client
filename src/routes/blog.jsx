@@ -38,8 +38,8 @@ export async function loader({params}){
 export default function Blog(){
     const {blog, comments, error} = useLoaderData();
     const fetcher = useFetcher(); 
-    const user = useOutletContext();
-    console.log(blog.tags)
+    const context = useOutletContext();
+    const user = context.user;
     useEffect(()=>{
 
         if(user && blog) {

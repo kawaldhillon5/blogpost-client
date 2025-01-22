@@ -17,7 +17,6 @@ export async function action({request, params}) {
         return error.message;
     } 
     const previousLocation = JSON.parse(formData.get('previousLocation'));
-    console.log(previousLocation);
     if (previousLocation) {
         return redirect(`${previousLocation}`)
       }

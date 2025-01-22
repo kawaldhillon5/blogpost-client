@@ -16,7 +16,8 @@ export async function loader() {
 
 export default function AllBlogRequests(){
     const {reqs} = useLoaderData();
-    const user = useOutletContext();
+    const context = useOutletContext();
+    const user = context.user;
     const navigate = useNavigate();
 
     return (

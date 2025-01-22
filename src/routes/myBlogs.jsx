@@ -13,7 +13,8 @@ export async function loader(){
 }
 export default function MyBlogs(){
     const {blogs} = useLoaderData();
-    const user = useOutletContext();
+    const context = useOutletContext();
+    const user = context.user;
     const [reqStatus, setreqStatus] = useState(4);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

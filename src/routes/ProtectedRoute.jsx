@@ -3,13 +3,13 @@ import { useEffect } from "react";
 
 
 export default function ProtectedRoute() {
-    const user = useOutletContext(); 
+    const context = useOutletContext();
+    const user = context.user; 
     const navigate = useNavigate();
 
     useEffect(()=>{
          function fun(){
             const res = user;
-            console.log(res);
             if(res === null) {
                 navigate('/authenticate/logIn', {replace: true});
             }

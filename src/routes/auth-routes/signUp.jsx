@@ -22,7 +22,7 @@ export async function action({request,params}) {
         console.log(error);
         return error.message;
     }
-    return null;
+    return redirect('/');
 }
 
 export default function SignUp(){

@@ -1,0 +1,56 @@
+.mobile-menu-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0); 
+    transform: translateX(100%); 
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .mobile-menu-container.open {
+    transform: translateX(0); /* Show menu */
+  }
+  
+  .menu-header {
+    background-color: #333333; /* Dark background */
+    padding: 15px;
+    color: #fff;
+    display: flex;
+    border-radius: 10px 10px 0 0 ;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 25%;
+  }
+  
+  .username {
+    margin-right: 10px;
+  }
+  
+  .menu-links {
+    border-radius: 0 0 10px 10px ;
+    background-color: #3b3b3b; /* Light background */
+    padding: 20px;
+  }
+  
+  .menu-links a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+  
+  .menu-links a.active {
+    font-weight: bold;
+  }
+  
+  .menu-toggle {
+    position: relative;
+    z-index: 1001;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }

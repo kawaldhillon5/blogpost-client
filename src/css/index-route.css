@@ -21,9 +21,32 @@
   gap: 20px;
 }
 
+.home-page-container-mobile{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 20px;
+}
+
 #blogs-container-home {
   width: 70%;
   height: 95%;
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 8px;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#blogs-container-home-mobile {
   background-color: #282828;
   padding: 20px;
   border-radius: 8px;
@@ -53,7 +76,6 @@
   border-radius: 8px;
   text-align: center; /* Center the content */
   color: #eee;
-
 }
 
 .call-to-action h2 {

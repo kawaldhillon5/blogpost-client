@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FaThumbsUp, FaExclamationTriangle  } from 'react-icons/fa';
 import './request-vote.css';
 import { getVotes, isVotedByUser, postVote } from '../helper-functions';
-import { set } from 'lodash';
 
 
 const ReqVoteComponent = ({ initialVotes = 0, initialState = false, id, type}) => {
