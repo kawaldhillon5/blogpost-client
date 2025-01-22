@@ -14,6 +14,7 @@ export async function loader() {
 export default function Index(){
     const context = useOutletContext();
     const viewMode = context.viewMode;
+    const user = context.user
 
     return (
 
@@ -24,7 +25,7 @@ export default function Index(){
             </div>
             {viewMode && <div className="call-to-action">
                 <Cta />
-                <Notifications />
+                <Notifications user={user}/>
             </div>}
             {
                 !viewMode && <FloatingButton />

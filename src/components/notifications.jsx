@@ -3,15 +3,13 @@ import './notifications.css'
 import { useOutletContext } from "react-router-dom";
 import { deleteNotification, getRequestFunc } from "../helper-functions";
 
-export default function Notifications(){
+export default function Notifications({user}){
     const [activeTab, setTab] = useState('notifications');
     const [error, setError] = useState(null);
     const [news, setNews] = useState([]);
     const [notifications, setNotifications] = useState([])
     const [loading, setLoading] = useState(true);
 
-    const context = useOutletContext();
-    const user = context.user;
     const handelDismiss = async (e, id)=>{
         e.stopPropagation();
         const item = e.target.parentNode;
@@ -28,8 +26,9 @@ export default function Notifications(){
         if(!user){
             setError(null);
             setTab('news');
+            setNotifications([]);
         }
-    },[activeTab]);    
+    },[activeTab, user]);    
 
     useEffect(()=>{
         const getData = async () =>{

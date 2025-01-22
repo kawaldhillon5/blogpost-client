@@ -4,6 +4,7 @@ import { Form, NavLink } from 'react-router-dom';
 import { FaBars} from 'react-icons/fa';
 import './expandable-header-menu.css'; 
 import {  FaXmark } from 'react-icons/fa6';
+import Notifications from '../notifications';
 
 const MobileMenu = ({ user, handleLogIn, location }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,6 +78,7 @@ const MobileMenu = ({ user, handleLogIn, location }) => {
                 About
                 </NavLink>
             </div>
+            <Notifications user={user}/>
         </div>
     </>
   );

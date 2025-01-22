@@ -64,7 +64,6 @@ export default function Root(){
    }
 
 
-   console.log(user);
     return (
         <>  
             <div>
