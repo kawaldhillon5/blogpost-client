@@ -11,7 +11,6 @@ const MobileMenu = ({ user, handleLogIn, location }) => {
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-        console.log("outsideCLick")
       setIsMenuOpen(false);
     }
   };

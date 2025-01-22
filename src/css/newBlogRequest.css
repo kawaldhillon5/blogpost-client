@@ -9,9 +9,8 @@
   
 
 #blog_req_form{
-    width: 100%;
-    max-width: 500px;
-    padding: 20px;
+    width: clamp(300px, 80%, 500px);
+    padding: 30px;
     background-color: #383838; /* Dark background */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.603);

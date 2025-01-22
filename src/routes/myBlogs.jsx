@@ -2,6 +2,7 @@ import { redirect, useLoaderData, Form, NavLink, useOutletContext } from "react-
 import "../css/myBlogs.css"
 import { getMyBlogs, getRequestFunc, postEditorReq } from "../helper-functions";
 import { useEffect, useState } from "react";
+import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 
 export async function action() {
     return redirect(`../editor/blog/new/0`);
@@ -15,6 +16,8 @@ export default function MyBlogs(){
     const {blogs} = useLoaderData();
     const context = useOutletContext();
     const user = context.user;
+    const viewMode = context.viewMode;
+    console.log(context)
     const [reqStatus, setreqStatus] = useState(4);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -68,20 +71,20 @@ export default function MyBlogs(){
                         </div>
                         <ul id="blogs_list">
                             {blogs.map(blog =>
-                                (<li className="blogs_list_item" key={blog._id}>
+                                (<li className={`blogs_list_item ${!viewMode ?'mobile':''}`} key={blog._id}>
                                     <NavLink className={({ isActive, isPending }) =>
                                             isActive
-                                            ? "blog_list_item_a active"
+                                            ? `blog_list_item_a active ${!viewMode ?'mobile':''}`
                                             : isPending
-                                            ? "blog_list_item_a pending"
-                                            : "blog_list_item_a"
+                                            ? `blog_list_item_a pending ${!viewMode ?'mobile':''}`
+                                            : `blog_list_item_a ${!viewMode ?'mobile':''}`
                                         }to={`../editor/blog/edit/${blog._id}`}>{blog.title}
                                      </NavLink>
-                                    <div className="votes_comments_main">
-                                        <div className="votes_count">{blog.votes}</div>
-                                        <div className="comments_count">{blog.comments.length}</div>
+                                    <div className={`votes_comments_main ${!viewMode ? "mobile":''}`}>
+                                        <div className={`votes_count  ${!viewMode ? "mobile":''} `}>{blog.votes}</div>
+                                        <div className={`comments_count  ${!viewMode ? "mobile":''} `}>{blog.comments.length}</div>
                                     </div>
-                                    <PubReqStatus reqStatus={blog.publishReqStatus} />
+                                    <PubReqStatus reqStatus={blog.publishReqStatus} viewMode={viewMode} />
                                 </li>)
                             )}
                         </ul>
@@ -111,7 +114,7 @@ export default function MyBlogs(){
 
 }
 
-function PubReqStatus({reqStatus}) {
+function PubReqStatus({reqStatus, viewMode}) {
     let message = null;
 
     switch (reqStatus) {
@@ -134,7 +137,7 @@ function PubReqStatus({reqStatus}) {
 
     return (
         <>
-            <div className={`blog_req_status_main status_color${reqStatus}`}>
+            <div className={`blog_req_status_main status_color${reqStatus} ${!viewMode ? "mobile":''} `}>
                 <p>{message}</p>
             </div>
         </>

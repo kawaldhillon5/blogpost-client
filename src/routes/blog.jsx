@@ -40,6 +40,7 @@ export default function Blog(){
     const fetcher = useFetcher(); 
     const context = useOutletContext();
     const user = context.user;
+    const viewMode = context.viewMode;
     useEffect(()=>{
 
         if(user && blog) {
@@ -70,9 +71,9 @@ export default function Blog(){
     return (
 
         <div id="blog_div">  
-            <div id="blog_title_div_detail">
-                <div className="blog_title">{blog.title}</div>   
-                <div id="blog_title_date_and_count">
+            <div className={`blog_title_div_detail ${!viewMode ? 'mobile':''}`}>
+                <div className={`blog_title ${!viewMode ? 'mobile':''}`}>{blog.title}</div>   
+                <div className={`blog_title_date_and_count  ${!viewMode ? 'mobile':''}`}>
                         { user ? 
                         <ReqVoteComponent id={blog._id} type= 'blog' />
                         : null

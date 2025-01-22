@@ -1,4 +1,4 @@
-import { Link, redirect, useLoaderData, useSubmit, Form, useActionData, useNavigate } from "react-router-dom";
+import { Link, redirect, useLoaderData, useSubmit, Form, useActionData, useNavigate, useParams } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState} from "react";
 import "../css/blog-editor.css";
@@ -32,6 +32,7 @@ export default function EditBlog() {
     const [tags, setTags] = useState(blog.tags.toString());
     const actionData = useActionData();
     const navigate =  useNavigate();
+    const params = useParams();
     const editorRef = useRef(null);
     const submit = useSubmit();
     const getMCEData = () => {
@@ -50,7 +51,7 @@ export default function EditBlog() {
         <div id="blog_edit_div">
            <div className="edit-blog-header">
                 <div>{mode === "new" ? "Create New Blog" : "Edit Blog"}</div>
-                <button type="button" onClick={toggleMinimize}>
+                <button className="new-blog-btn" type="button" onClick={toggleMinimize}>
                     {titleMinimised ? "Expand" : "Minimize"}
                 </button>
             </div>
@@ -107,15 +108,17 @@ export default function EditBlog() {
                     </div>
                 </div>
                 <div id="blog_edit_btns">
-                    <button type="button" className="blog_btn" onClick={()=>{onClickDelete()}}>Delete</button>
-                    <dialog id="del_dia">
-                        <p>Delete This Blog ?</p>
-                        <div id="dia_btns">
-                            <button type="button" onClick={async ()=>{await diaClickYes(blog._id); navigate('/editor/myBlogs')}}>Yes</button>
-                            <button type="button" onClick={()=>{diaClickNo()}}>No</button>
-                        </div>
-                        <div id="del_dia_text"></div>
-                    </dialog>
+                    {(params.mode === "edit") && (<>
+                        <button type="button" className="blog_btn" onClick={()=>{onClickDelete()}}>Delete</button>
+                        <dialog id="del_dia">
+                            <p>Delete This Blog ?</p>
+                            <div id="dia_btns">
+                                <button type="button" onClick={async ()=>{await diaClickYes(blog._id); navigate('/editor/myBlogs')}}>Yes</button>
+                                <button type="button" onClick={()=>{diaClickNo()}}>No</button>
+                            </div>
+                            <div id="del_dia_text"></div>
+                        </dialog>
+                        </>)}
                     <button type="button" onClick={(e) => {
                         e.preventDefault();
                         let formData = new FormData();

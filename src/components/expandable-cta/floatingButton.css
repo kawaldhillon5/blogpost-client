@@ -32,7 +32,7 @@
     width: 80%;
     position: fixed;
     left: 10%;
-    bottom: -4%;
+    transform: translateY(0);
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -42,7 +42,7 @@
 }
 
 .call-to-action-mobile.ctaExpanded {
-    transform: translateY(-35%);
+    transform: translateY(-100%);
 }
 
 .call-to-action-mobile>div{

@@ -4,7 +4,8 @@ import { useEffect } from "react";
 
 export default function ProtectedRoute() {
     const context = useOutletContext();
-    const user = context.user; 
+    const user = context.user;
+    const viewMode = context.viewMode; 
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -16,6 +17,6 @@ export default function ProtectedRoute() {
     } fun()
     },[user ,navigate]);
 
-    return <Outlet context={user}/>
+    return <Outlet context={{user, viewMode}}/>
 }
 
