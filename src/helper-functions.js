@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ca } from "date-fns/locale";
-const baseURL = "http://localhost:3000/";
+const baseURL = "http://10.0.0.17:3000/";
 
 axios.defaults.withCredentials = true;
 
