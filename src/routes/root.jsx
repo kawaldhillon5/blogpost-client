@@ -103,7 +103,7 @@ export default function Root(){
                             : isPending
                             ? "pending"
                             : ""
-                        } to={`/editor/about`}>About</NavLink>
+                        } to={`/about`}>About</NavLink>
                         {user ? <Form method="post">
                             <button type="submit">Log Out</button>
                             <input type="hidden" name="previousLocation" value={JSON.stringify(location.pathname|| '/')} />

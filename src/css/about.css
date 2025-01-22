@@ -1,0 +1,120 @@
+.about-container {
+  padding: 40px; /* Increased padding */
+  font-family: sans-serif;
+  background-color: #333; /* Darker background */
+  color: #fff; /* White text */
+  margin: 20px;
+  border-radius: 15px;
+}
+
+.about-title {
+  color: #61dafb; /* React blue */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-description {
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ddd; /* Slightly lighter text */
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 30px; /* Increased gap */
+}
+
+.feature {
+  padding: 30px; /* Increased padding */
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s; /*Added background-color transition*/
+}
+
+.feature:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+.feature-icon {
+    font-size: 4em; /* Larger icons */
+    margin-bottom: 20px;
+    color: #61dafb; /* React Blue */
+}
+
+.feature h4 {
+  margin-bottom: 0; /* Remove default margin */
+  color: #fff;
+}
+
+.feature.browse {
+  background-color: #329c36; /* Green - for browsing/discovering */
+  color: white;
+}
+
+.feature.browse .feature-icon{
+    color: white;
+}
+
+.feature.browse:hover{
+    background-color: #2f7032;
+}
+
+.feature.write {
+  background-color: #2196F3; /* Blue - for writing/creating */
+    color: white;
+}
+
+.feature.write .feature-icon{
+    color: white;
+}
+
+.feature.write:hover{
+    background-color: #0b7dda;
+}
+
+
+.feature.suggest {
+  background-color: #FF9800; /* Orange - for suggesting/ideas */
+    color: white;
+}
+
+.feature.suggest .feature-icon{
+    color: white;
+}
+
+.feature.suggest:hover{
+    background-color: #f57c00;
+}
+
+.feature.discuss {
+  background-color: #9C27B0; /* Purple - for discussing/communicating */
+    color: white;
+}
+
+.feature.discuss .feature-icon{
+    color: white;
+}
+
+.feature.discuss:hover{
+    background-color: #7b1fa2;
+}
+
+/* ... (rest of your CSS) */
+
+.cta-buttons button {
+    background-color: #61dafb; /* React blue */
+    /* ... other styles */
+}
+
+.cta-buttons button:hover {
+    background-color: #4fa3d1;
+}
+
+.contact-section {
+    text-align: center;
+    margin-top: 50px;
+}

@@ -19,6 +19,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Author, {loader as authorLoader} from "./routes/author";
 import EditBlog, {loader as editBlogLoader, action as editBlogAction} from "./routes/editBlog";
 import MyBlogs, {loader as myBlogsLoader, action as myBlogsAction} from "./routes/myBlogs";
+import About from "./routes/about";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Index />,
         loader: indexLoader,
+      },
+      {
+        path: '/about',
+        element: < About/>
       },
       {
         path: 'authenticate/signUp',
