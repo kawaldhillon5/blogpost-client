@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './featuredBlog.css'; // Import CSS
 import {getRequestFunc } from '../helper-functions';
-import { Link } from 'react-router-dom';
+import { Link, useOutlet, useOutletContext } from 'react-router-dom';
 
 const FeaturedBlog = () => {
   const [blog, setBlog] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const viewMode = useOutletContext().viewMode;
   useEffect(() => {
     const fetchFeaturedBlog = async () => {
       try {
@@ -59,7 +59,7 @@ const FeaturedBlog = () => {
         <Link to={`/client/blog/${blog._id}`} className="featured-blog-link"> {/* Wrap with Link */}
           <div className="featured-blog">
             <div className="blog-header">
-              <h2>{blog.title}</h2>
+              <h2 className={`featured-blog-title ${!viewMode ? 'mobile':''}`}>{blog.title}</h2>
               {blog.author && <p className="author">By: {blog.author.first_name} {blog.author.last_name}</p>}
             </div>
             <div className="blog-body">
