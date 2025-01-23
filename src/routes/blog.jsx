@@ -1,6 +1,6 @@
 import { useFetcher, useLoaderData, useOutletContext } from "react-router-dom";
 import { formatDate, getBlog, getComments, postComment, postVote } from "../helper-functions"
-import HtmlParser from "react-html-parser";
+import HtmlParser from "html-react-parser";
 import "../css/blog-detail.css";
 import { useEffect } from "react";
 import ReqVoteComponent from "../components/request-vote";
