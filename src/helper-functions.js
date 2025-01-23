@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://https://fluorescent-silky-xenon.glitch.me";
+const baseURL = process.env.BACKEND_URL;
 
 axios.defaults.withCredentials = true;
 
