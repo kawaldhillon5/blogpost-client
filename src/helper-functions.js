@@ -1,6 +1,7 @@
 import axios from "axios";
+require('dotenv').config();
 
-const baseURL = "http://https://fluorescent-silky-xenon.glitch.me";
+const baseURL = process.env.API_URL;
 
 axios.defaults.withCredentials = true;
 

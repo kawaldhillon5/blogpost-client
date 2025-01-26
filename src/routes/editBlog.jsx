@@ -3,7 +3,9 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState} from "react";
 import "../css/blog-editor.css";
 import { getBlogEditor, postBlogData, postDeleteBlogReq } from "../helper-functions";
+require('dotenv').config();
 
+const tinyMCEAPI = process.env.TINYMCE_API
 
 export async function action({request, params}){
     const formData = await request.formData();
@@ -84,7 +86,7 @@ export default function EditBlog() {
                 <div className="tinymce-container">
                     <label htmlFor="blog_body">Body:</label>
                     <Editor
-                        apiKey='t2hjlizfwre228cruv3b99ekjahquf6qqc7o788ludexidvk'
+                        apiKey={tinyMCEAPI}
                         onInit={(_evt, editor) => editorRef.current = editor}
                         initialValue={blog.body}
                         onFocus={() => {setMinimised(true);console.log("focus")}}

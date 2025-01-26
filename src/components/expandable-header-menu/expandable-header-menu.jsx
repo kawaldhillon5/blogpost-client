@@ -9,7 +9,6 @@ import Notifications from '../notifications';
 const MobileMenu = ({ user, handleLogIn, location }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
-
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setIsMenuOpen(false);
@@ -45,14 +44,14 @@ const MobileMenu = ({ user, handleLogIn, location }) => {
                 )}
             </div>
             <div className="menu-links">
-                <NavLink 
-                to={`/editor/myBlogs`} 
-                className={({ isActive, isPending }) => 
-                    isActive ? 'active' : isPending ? 'pending' : ''
-                }
-                >
-                My Blogs
-                </NavLink>
+                  {user && <NavLink 
+                  to={`/editor/myBlogs`} 
+                  className={({ isActive, isPending }) => 
+                      isActive ? 'active' : isPending ? 'pending' : ''
+                  }
+                  >
+                  My Blogs
+                  </NavLink>}
                 <NavLink 
                 to={`/client/allBlogPosts`} 
                 className={({ isActive, isPending }) => 
@@ -70,7 +69,7 @@ const MobileMenu = ({ user, handleLogIn, location }) => {
                 Blog Requests
                 </NavLink>
                 <NavLink 
-                to={`/editor/about`} 
+                to={`/about`} 
                 className={({ isActive, isPending }) => 
                     isActive ? 'active' : isPending ? 'pending' : ''
                 }
