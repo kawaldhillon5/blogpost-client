@@ -1,7 +1,6 @@
 import axios from "axios";
-require('dotenv').config();
 
-const baseURL = process.env.API_URL;
+const baseURL = import.meta.env.VITE_API_URL;
 
 axios.defaults.withCredentials = true;
 
