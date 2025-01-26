@@ -3,9 +3,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState} from "react";
 import "../css/blog-editor.css";
 import { getBlogEditor, postBlogData, postDeleteBlogReq } from "../helper-functions";
-require('dotenv').config();
 
-const tinyMCEAPI = process.env.TINYMCE_API
+const tinyMCEAPI = import.meta.env.VITE_TINYMCE_API
 
 export async function action({request, params}){
     const formData = await request.formData();
