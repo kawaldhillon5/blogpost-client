@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://localhost:3000/';
-// const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 export async function getAllBlogs(){
