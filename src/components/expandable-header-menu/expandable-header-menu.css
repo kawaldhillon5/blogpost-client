@@ -47,6 +47,7 @@
   }
   
   .menu-toggle {
+    padding: 2% 4%;
     position: relative;
     z-index: 1001;
     background-color: transparent;

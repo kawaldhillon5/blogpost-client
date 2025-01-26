@@ -1,8 +1,6 @@
 .search-container {
     flex: 1;
     position: relative; /* Needed for absolute positioning of results */
-    width: 90%; /* Adjust as needed */
-    margin-left: 5%;
 }
 
 
