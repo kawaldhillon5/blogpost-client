@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = 'http://localhost:3000/';
+// const baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 export async function getAllBlogs(){
@@ -257,10 +258,11 @@ export function getAuthorDetails(authorId){
 export async function postBlogData(data, blogId, mode){
     return await axios.post(`${baseURL}editor/updateBlog/${blogId}/${mode}`, data)
     .then((response) => {
-        return response.data.id;
+        return response;
     })
     .catch((error)=> {
         console.log(error);
+        return error.response;
     })
 }
 
@@ -271,6 +273,7 @@ export async function getBlogEditor(blogId){
     })
     .catch(function(error){
         console.log(error);
+        return
     });
 }
 

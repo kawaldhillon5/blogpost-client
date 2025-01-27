@@ -80,6 +80,25 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    align-items: stretch;
+}
+
+.blog-save-error{
+    border-radius: 5px;
+    background-color: #e99f9f;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    color: #ac0000;
+}
+
+.blog-save-sucess{
+    border-radius: 5px;
+    background-color: #65a7e4;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    color: #073983;
 }
 
 #blog_edit_btns button {

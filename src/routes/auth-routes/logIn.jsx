@@ -8,7 +8,6 @@ export async function action({request, params}) {
     const formData = await request.formData();
     try {
         const response = await logIn(formData.get("username"), formData.get("password"));
-        console.log(response);
         if(!(response.status === 200)) {
             throw new Error(response.data);
         }

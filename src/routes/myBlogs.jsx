@@ -1,8 +1,10 @@
-import { redirect, useLoaderData, Form, NavLink, useOutletContext } from "react-router-dom";
+import { redirect, useLoaderData, Form, NavLink, useOutletContext, Link } from "react-router-dom";
 import "../css/myBlogs.css"
 import { getMyBlogs, getRequestFunc, postEditorReq } from "../helper-functions";
 import { useEffect, useState } from "react";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
+import { FaComment, FaEdit, FaPencilAlt, FaRegEdit, FaThumbsUp } from "react-icons/fa";
+import { FaPen, FaPencil } from "react-icons/fa6";
 
 export async function action() {
     return redirect(`../editor/blog/new/0`);
@@ -17,7 +19,6 @@ export default function MyBlogs(){
     const context = useOutletContext();
     const user = context.user;
     const viewMode = context.viewMode;
-    console.log(context)
     const [reqStatus, setreqStatus] = useState(4);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -78,13 +79,14 @@ export default function MyBlogs(){
                                             : isPending
                                             ? `blog_list_item_a pending ${!viewMode ?'mobile':''}`
                                             : `blog_list_item_a ${!viewMode ?'mobile':''}`
-                                        }to={`../editor/blog/edit/${blog._id}`}>{blog.title}
+                                        }to={`../client/blog/${blog._id}`}>{blog.title}
                                      </NavLink>
                                     <div className={`votes_comments_main ${!viewMode ? "mobile":''}`}>
-                                        <div className={`votes_count  ${!viewMode ? "mobile":''} `}>{blog.votes}</div>
-                                        <div className={`comments_count  ${!viewMode ? "mobile":''} `}>{blog.comments.length}</div>
+                                        <div className={`votes_count  ${!viewMode ? "mobile":''} `}><FaThumbsUp /><span>{blog.votes}</span></div>
+                                        <div className={`comments_count  ${!viewMode ? "mobile":''} `}><FaComment/><spna>{blog.comments.length}</spna></div>
                                     </div>
                                     <PubReqStatus reqStatus={blog.publishReqStatus} viewMode={viewMode} />
+                                    <Link className={`myBlogs-edit-link ${!viewMode ? "mobile":''}`} to={`../editor/blog/edit/${blog._id}`}><FaPen /></Link>
                                 </li>)
                             )}
                         </ul>

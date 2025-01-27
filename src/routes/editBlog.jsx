@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState} from "react";
 import "../css/blog-editor.css";
 import { getBlogEditor, postBlogData, postDeleteBlogReq } from "../helper-functions";
+import { FaCheck, FaTriangleExclamation } from "react-icons/fa6";
 
 const tinyMCEAPI = import.meta.env.VITE_TINYMCE_API
 
@@ -13,11 +14,21 @@ export async function action({request, params}){
         return tag.trim();
     });
    
-    const resp = await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit"), tags: tagsArrayTrimmed}, params.blogId, formData.get("button"));
-    if(resp){
-        return redirect(`/editor/blog/edit/${resp}`);
+    try {
+        const resp = await postBlogData({title:formData.get("blog_title_edit"), body: formData.get("blog_body_edit"), tags: tagsArrayTrimmed}, params.blogId, formData.get("button"));
+        if(resp.status === 200){
+            params.mode = 'edit'
+            params.blogId = resp.data.id;
+            return {sucess: true, message: resp.data.message}
+        } else if(resp.status === 404){
+            throw new Error(resp.data)
+        } else {
+            throw new Error("Something Went Wrong");
+        }
+    } catch(error){
+        console.log(error);
+        return {sucess:false , message: error.message};
     }
-    return "Something went wrong";
 }
 
 export async function loader({params}) {
@@ -45,8 +56,6 @@ export default function EditBlog() {
     const toggleMinimize = () => {
         setMinimised(!titleMinimised);
     };
-
-
     return (
         
         <div id="blog_edit_div">
@@ -109,6 +118,8 @@ export default function EditBlog() {
                     </div>
                 </div>
                 <div id="blog_edit_btns">
+                    {actionData && (!actionData.sucess) && <div className="blog-save-error"><FaTriangleExclamation className="error-icon"  /> <span>{actionData.message}</span></div>}
+                    {actionData && actionData.sucess && <div className="blog-save-sucess"><FaCheck /> <span>{actionData.message}</span></div> }
                     {(params.mode === "edit") && (<>
                         <button type="button" className="blog_btn" onClick={()=>{onClickDelete()}}>Delete</button>
                         <dialog id="del_dia">
