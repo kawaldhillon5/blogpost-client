@@ -7,7 +7,6 @@ export default function ProtectedRoute() {
     const user = context.user;
     const viewMode = context.viewMode; 
     const navigate = useNavigate();
-
     useEffect(()=>{
          function fun(){
             const res = user;
@@ -17,6 +16,7 @@ export default function ProtectedRoute() {
     } fun()
     },[user ,navigate]);
 
-    return <Outlet context={{user, viewMode}}/>
+    return  user ? <Outlet context={{user, viewMode}}/>: navigate('/authenticate/logIn', {replace: true})
+        
 }
 

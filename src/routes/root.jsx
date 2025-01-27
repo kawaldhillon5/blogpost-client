@@ -9,7 +9,6 @@ export async function action({request, params}) {
     const formData = await request.formData();
     await LogOut();
     const previousLocation = JSON.parse(formData.get('previousLocation'));
-    console.log(previousLocation);
     if (previousLocation) {
         return redirect(`${previousLocation}`)
     }

@@ -17,6 +17,7 @@ export async function action({request, params}) {
     } 
     const previousLocation = JSON.parse(formData.get('previousLocation'));
     if (previousLocation) {
+        if(previousLocation === '/authenticate/logIn'){previousLocation === '/'}
         return redirect(`${previousLocation}`)
       }
     return redirect('/');
