@@ -4,6 +4,9 @@ This blog post website is built using **React** and **Vite**. Users can explore 
 [Api](https://github.com/kawaldhillon5/blogpost-backend)
 
 Test Acount can be used to log-in and browse [site](https://blogpostsite-kawal.netlify.app)
+
+The backend is Deployed on free tier of Glitch(Hosting Service), so it takes some time to wake the server, first few seconds will show a blank page.
+
 - test user name: foo
 - test password: fooBar1!
 ---
