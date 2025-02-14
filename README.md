@@ -3,6 +3,9 @@
 This blog post website is built using **React** and **Vite**. Users can explore blog content, sign up to vote, comment, and write their own blog posts. 
 [Api](https://github.com/kawaldhillon5/blogpost-backend)
 
+Test Acount can be used to log-in and browse [site](https://blogpostsite-kawal.netlify.app)
+- test user name: foo
+- test password: fooBar1!
 ---
 
 ## 📦 Dependencies
